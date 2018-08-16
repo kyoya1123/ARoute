@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  ARoute
-//
-//  Created by Kyoya Yamaguchi on 2018/07/07.
-//  Copyright © 2018年 Kyoya Yamaguchi. All rights reserved.
-//
-
 import UIKit
 import SceneKit
 import ARKit
