@@ -1,65 +1,65 @@
-//
-//  ViewController.swift
-//  ARoute
-//
-//  Created by Kyoya Yamaguchi on 2018/07/07.
-//  Copyright © 2018年 Kyoya Yamaguchi. All rights reserved.
-//
-
 import UIKit
 import SceneKit
 import ARKit
+import CoreLocation
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController {
     
     @IBOutlet var sceneView: ARSCNView!
     
+    var locationManager : CLLocationManager!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Set the view's delegate
+        setupLocationManager()
         sceneView.delegate = self
-        
-        // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = [.vertical]
-        
         guard let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil) else {
             fatalError("Missing expected asset catalog resources.")
         }
-        
         configuration.detectionImages = referenceImages
-        
-        // Run the view's session
         sceneView.session.run(configuration)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        // Pause the view's session
         sceneView.session.pause()
     }
     
+    func setupLocationManager() {
+        locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.distanceFilter = 100
+        locationManager.delegate = self
+        let status = CLLocationManager.authorizationStatus()
+        checkAuthorization(status)
+    }
+    
+    func checkAuthorization(_ status: CLAuthorizationStatus) {
+        switch status {
+        case .notDetermined:
+            locationManager.requestAlwaysAuthorization()
+        case .restricted, .denied:
+            print("設定に飛ばす")
+        case .authorizedWhenInUse, .authorizedAlways:
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func getStationName(_ coordinate: CLLocationCoordinate2D) {
+        StationGetter.getStation(coordinate)
+    }
+}
+
+extension ViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-//        guard let imageAnchor = anchor as? ARImageAnchor else { return }
-//        let scene = SCNScene(named: "art.scnassets/sphere.scn")!
-//        let wallNode = scene.rootNode.childNode(withName: "sphere", recursively: true)
-//        wallNode?.position = SCNVector3(anchor.transform.columns.3.x, anchor.transform.columns.3.y, anchor.transform.columns.3.z)
-//        let (min, max) = (wallNode?.boundingBox)!
-//        let w = CGFloat(max.x - min.x)
-//        let magnification = 1.0 / w
-//        wallNode?.scale = SCNVector3(magnification, magnification, magnification)
-//        node.addChildNode(wallNode!)
-//        let referenceImage = imageAnchor.referenceImage
-//        print("image is detected: \(String(describing: referenceImage.name))")
         guard let imageAnchor = anchor as? ARImageAnchor else { return }
         let referenceImage = imageAnchor.referenceImage
         DispatchQueue.global().async {
@@ -105,5 +105,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
+    }
+}
+
+extension ViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations.last?.coordinate
+        getStationName(location!)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        checkAuthorization(status)
     }
 }
