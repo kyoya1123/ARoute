@@ -11,27 +11,40 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrape()
         setupLocationManager()
-        sceneView.delegate = self
-        sceneView.showsStatistics = true
+        scrape()
+        setupSceneView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = [.vertical]
-        guard let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil) else {
-            fatalError("Missing expected asset catalog resources.")
-        }
-        configuration.detectionImages = referenceImages
+        let configuration = setupTrackingConfiguration()
         sceneView.session.run(configuration)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         sceneView.session.pause()
+    }
+}
+
+fileprivate extension ViewController {
+    
+    func setupSceneView() {
+        sceneView.delegate = self
+        #if DEBUG
+        sceneView.showsStatistics = true
+        #endif
+    }
+    
+    func setupTrackingConfiguration() -> ARWorldTrackingConfiguration {
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = [.vertical]
+        guard let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil) else {
+            fatalError("Missing expected asset catalog resources.")
+        }
+        configuration.detectionImages = referenceImages
+        return configuration
     }
     
     func setupLocationManager() {
@@ -65,14 +78,29 @@ class ViewController: UIViewController {
     }
     
     func scrape() {
-        let urlString = "https://transit.yahoo.co.jp/search/result?from=新井薬師前&to=高田馬場&y=2018&m=08&d=19&hh=02&m2=8&m1=2"
-        let url = URL(string: urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)!
-        let doc = Ji(htmlURL: url)
-        let leaving = doc?.xPath("//*[@id='route01']/div[4]/div[1]/ul[1]/li")?.first?.content
-        let arriving = doc?.xPath("//*[@id='route01']/div[4]/div[3]/ul[1]/li")?.first?.content
-        let requiredTime = doc?.xPath("//*[@id='route01']/dl/dd[1]/ul/li[1]/text()")?.first?.content
-        let lineNum = doc?.xPath("//*[@id='route01']/div[4]/div[2]/div/ul/li[2]/span[1]")?.first?.content
-        print(leaving, arriving, requiredTime, lineNum)
+        let doc = Ji(htmlURL: prepareURL())
+        let xPaths = ["//*[@id='route01']/div[4]/div[1]/ul[1]/li",//出発時刻
+                      "//*[@id='route01']/div[4]/div[3]/ul[1]/li",//到着時刻
+                      "//*[@id='route01']/dl/dd[1]/ul/li[1]/text()",//所要時間
+                      "//*[@id='route01']/div[4]/div[2]/div/ul/li[2]/span[1]"]//何番線発
+        var routeSearchResult = [String]()
+        for xPath in xPaths {
+            let scrapedText = doc?.xPath(xPath)?.first?.content
+            routeSearchResult.append(scrapedText!)
+        }
+    }
+    
+    func prepareURL() -> URL {
+        let splitDate = prepareSplitDate()
+        let urlString = "https://transit.yahoo.co.jp/search/result?from=\(StationGetter.nearestStation)&to=高田馬場&y=\(splitDate[0])&m=\(splitDate[1])&d=\(splitDate[2])&hh=\(splitDate[3])&m2=\(splitDate[4].suffix(1))&m1=\(splitDate[4].prefix(1))"
+        return URL(string: urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)!
+    }
+    
+    func prepareSplitDate() -> [String] {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy,MM,dd,hh,mm"
+        let dateString = formatter.string(from: Date())
+        return dateString.components(separatedBy: ",")
     }
 }
 
