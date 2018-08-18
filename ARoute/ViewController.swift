@@ -65,7 +65,7 @@ class ViewController: UIViewController {
     }
     
     func scrape() {
-        let urlString = "https://transit.yahoo.co.jp/search/result?flatlon=&from=新井薬師前&tlatlon=&to=高田馬場&viacode=&via=&viacode=&via=&viacode=&via=&y=2018&m=08&d=19&hh=02&m2=8&m1=2&type=1&ticket=ic&expkind=1&ws=3&s=0&kw=高田馬場"
+        let urlString = "https://transit.yahoo.co.jp/search/result?from=新井薬師前&to=高田馬場&y=2018&m=08&d=19&hh=02&m2=8&m1=2"
         let url = URL(string: urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)!
         let doc = Ji(htmlURL: url)
         let leaving = doc?.xPath("//*[@id='route01']/div[4]/div[1]/ul[1]/li")?.first?.content
