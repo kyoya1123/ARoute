@@ -1,6 +1,6 @@
 import UIKit
-import SceneKit
 import ARKit
+import SceneKit
 import CoreLocation
 
 class ViewController: UIViewController {
@@ -47,14 +47,16 @@ class ViewController: UIViewController {
         case .notDetermined:
             locationManager.requestAlwaysAuthorization()
         case .restricted, .denied:
-            print("設定に飛ばす")
+            let alert = UIAlertController(title: "位置情報の使用が許可されていません", message: "設定を変更する", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                if let url = URL(string: "\(UIApplication.openSettingsURLString)&path=LOCATION") {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }))
+            present(alert, animated: true, completion: nil)
         case .authorizedWhenInUse, .authorizedAlways:
             locationManager.startUpdatingLocation()
         }
-    }
-    
-    func getStationName(_ coordinate: CLLocationCoordinate2D) {
-        StationGetter.getStation(coordinate)
     }
 }
 
@@ -82,7 +84,7 @@ extension ViewController: ARSCNViewDelegate {
              animation that limits the duration for which the plane visualization appears.
              */
             
-            // Add the plane visualization to the scene.
+            // Add the plane visualization to the scene
             node.addChildNode(planeNode)
         }
         
@@ -91,27 +93,11 @@ extension ViewController: ARSCNViewDelegate {
             print("Detected image “\(imageName)”")
         }
     }
-    
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        // Present an error message to the user
-        
-    }
-    
-    func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay
-        
-    }
-    
-    func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
-        
-    }
 }
 
 extension ViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations.last?.coordinate
-        getStationName(location!)
+        StationGetter.getStationName((locations.last?.coordinate)!)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
