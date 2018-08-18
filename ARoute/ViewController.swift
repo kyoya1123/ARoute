@@ -11,6 +11,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        scrape()
         setupLocationManager()
         sceneView.delegate = self
         sceneView.showsStatistics = true
@@ -47,16 +48,31 @@ class ViewController: UIViewController {
         case .notDetermined:
             locationManager.requestAlwaysAuthorization()
         case .restricted, .denied:
-            let alert = UIAlertController(title: "位置情報の使用が許可されていません", message: "設定を変更する", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                if let url = URL(string: "\(UIApplication.openSettingsURLString)&path=LOCATION") {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                }
-            }))
-            present(alert, animated: true, completion: nil)
+            showAlert()
         case .authorizedWhenInUse, .authorizedAlways:
             locationManager.startUpdatingLocation()
         }
+    }
+    
+    func showAlert() {
+        let alert = UIAlertController(title: "位置情報の使用が許可されていません", message: "設定を変更する", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            if let url = URL(string: "\(UIApplication.openSettingsURLString)&path=LOCATION") {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func scrape() {
+        let urlString = "https://transit.yahoo.co.jp/search/result?flatlon=&from=新井薬師前&tlatlon=&to=高田馬場&viacode=&via=&viacode=&via=&viacode=&via=&y=2018&m=08&d=19&hh=02&m2=8&m1=2&type=1&ticket=ic&expkind=1&ws=3&s=0&kw=高田馬場"
+        let url = URL(string: urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)!
+        let doc = Ji(htmlURL: url)
+        let leaving = doc?.xPath("//*[@id='route01']/div[4]/div[1]/ul[1]/li")?.first?.content
+        let arriving = doc?.xPath("//*[@id='route01']/div[4]/div[3]/ul[1]/li")?.first?.content
+        let requiredTime = doc?.xPath("//*[@id='route01']/dl/dd[1]/ul/li[1]/text()")?.first?.content
+        let lineNum = doc?.xPath("//*[@id='route01']/div[4]/div[2]/div/ul/li[2]/span[1]")?.first?.content
+        print(leaving, arriving, requiredTime, lineNum)
     }
 }
 

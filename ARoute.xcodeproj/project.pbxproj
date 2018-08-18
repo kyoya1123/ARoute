@@ -15,6 +15,11 @@
 		9C7A84EB20F08E1000CEA484 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C7A84E920F08E1000CEA484 /* LaunchScreen.storyboard */; };
 		9C915BDB21250F210036DE40 /* StationGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C915BDA21250F210036DE40 /* StationGetter.swift */; };
 		9C915BDD21250FE10036DE40 /* ResponseStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C915BDC21250FE10036DE40 /* ResponseStruct.swift */; };
+		9CEE4EB52127C647000DB960 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEE4EB42127C647000DB960 /* libxml2.tbd */; };
+		9CEE4EB72127C64D000DB960 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEE4EB62127C64D000DB960 /* libxml2.2.tbd */; };
+		9CEE4EBC2127C722000DB960 /* JiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEE4EB92127C722000DB960 /* JiHelper.swift */; };
+		9CEE4EBD2127C722000DB960 /* Ji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEE4EBA2127C722000DB960 /* Ji.swift */; };
+		9CEE4EBE2127C722000DB960 /* JiNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEE4EBB2127C722000DB960 /* JiNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +33,12 @@
 		9C7A84EC20F08E1000CEA484 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C915BDA21250F210036DE40 /* StationGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationGetter.swift; sourceTree = "<group>"; };
 		9C915BDC21250FE10036DE40 /* ResponseStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseStruct.swift; sourceTree = "<group>"; };
+		9CEE4EB42127C647000DB960 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		9CEE4EB62127C64D000DB960 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
+		9CEE4EB82127C6A5000DB960 /* ARoute-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ARoute-Bridging-Header.h"; sourceTree = "<group>"; };
+		9CEE4EB92127C722000DB960 /* JiHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JiHelper.swift; sourceTree = "<group>"; };
+		9CEE4EBA2127C722000DB960 /* Ji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ji.swift; sourceTree = "<group>"; };
+		9CEE4EBB2127C722000DB960 /* JiNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JiNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +46,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CEE4EB72127C64D000DB960 /* libxml2.2.tbd in Frameworks */,
+				9CEE4EB52127C647000DB960 /* libxml2.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,8 +57,10 @@
 		9C7A84D220F08E0E00CEA484 = {
 			isa = PBXGroup;
 			children = (
+				9CEE4EB82127C6A5000DB960 /* ARoute-Bridging-Header.h */,
 				9C7A84DD20F08E0E00CEA484 /* ARoute */,
 				9C7A84DC20F08E0E00CEA484 /* Products */,
+				9CEE4EB32127C647000DB960 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,6 +75,9 @@
 		9C7A84DD20F08E0E00CEA484 /* ARoute */ = {
 			isa = PBXGroup;
 			children = (
+				9CEE4EBA2127C722000DB960 /* Ji.swift */,
+				9CEE4EB92127C722000DB960 /* JiHelper.swift */,
+				9CEE4EBB2127C722000DB960 /* JiNode.swift */,
 				9C7A84DE20F08E0E00CEA484 /* AppDelegate.swift */,
 				9C7A84E020F08E0E00CEA484 /* art.scnassets */,
 				9C7A84E220F08E0E00CEA484 /* ViewController.swift */,
@@ -71,6 +89,15 @@
 				9C7A84EC20F08E1000CEA484 /* Info.plist */,
 			);
 			path = ARoute;
+			sourceTree = "<group>";
+		};
+		9CEE4EB32127C647000DB960 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9CEE4EB62127C64D000DB960 /* libxml2.2.tbd */,
+				9CEE4EB42127C647000DB960 /* libxml2.tbd */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,8 +173,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C7A84E320F08E0E00CEA484 /* ViewController.swift in Sources */,
+				9CEE4EBE2127C722000DB960 /* JiNode.swift in Sources */,
 				9C7A84DF20F08E0E00CEA484 /* AppDelegate.swift in Sources */,
+				9CEE4EBD2127C722000DB960 /* Ji.swift in Sources */,
 				9C915BDB21250F210036DE40 /* StationGetter.swift in Sources */,
+				9CEE4EBC2127C722000DB960 /* JiHelper.swift in Sources */,
 				9C915BDD21250FE10036DE40 /* ResponseStruct.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,6 +261,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "ARoute-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -285,6 +316,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "ARoute-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -296,13 +328,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3X7LEN654Y;
+				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = ARoute/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kyoya.ARoute;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ARoute-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -314,13 +349,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3X7LEN654Y;
+				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = ARoute/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kyoya.ARoute;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ARoute-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
