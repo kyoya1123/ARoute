@@ -1,0 +1,23 @@
+{
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  },
+  "resources" : [
+    {
+      "filename" : "山手線.arreferenceimage"
+    },
+    {
+      "filename" : "総武線.arreferenceimage"
+    },
+    {
+      "filename" : "中央線.arreferenceimage"
+    },
+    {
+      "filename" : "田園都市線.arreferenceimage"
+    },
+    {
+      "filename" : "東横線.arreferenceimage"
+    }
+  ]
+}

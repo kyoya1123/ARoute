@@ -1,54 +1,96 @@
 import UIKit
 import SceneKit
 import ARKit
+import CoreLocation
 
-class ViewController: UIViewController, ARSCNViewDelegate {
-
+class ViewController: UIViewController {
+    
     @IBOutlet var sceneView: ARSCNView!
+    
+    var locationManager : CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Set the view's delegate
+        setupLocationManager()
         sceneView.delegate = self
-        
-        // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
-        
-        // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        
-        // Set the scene to the view
-        sceneView.scene = scene
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
-
-        // Run the view's session
+        configuration.planeDetection = [.vertical]
+        guard let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil) else {
+            fatalError("Missing expected asset catalog resources.")
+        }
+        configuration.detectionImages = referenceImages
         sceneView.session.run(configuration)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        // Pause the view's session
         sceneView.session.pause()
     }
-
-    // MARK: - ARSCNViewDelegate
     
-/*
-    // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
-     
-        return node
+    func setupLocationManager() {
+        locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.distanceFilter = 100
+        locationManager.delegate = self
+        let status = CLLocationManager.authorizationStatus()
+        checkAuthorization(status)
     }
-*/
+    
+    func checkAuthorization(_ status: CLAuthorizationStatus) {
+        switch status {
+        case .notDetermined:
+            locationManager.requestAlwaysAuthorization()
+        case .restricted, .denied:
+            print("設定に飛ばす")
+        case .authorizedWhenInUse, .authorizedAlways:
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func getStationName(_ coordinate: CLLocationCoordinate2D) {
+        StationGetter.getStation(coordinate)
+    }
+}
+
+extension ViewController: ARSCNViewDelegate {
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        guard let imageAnchor = anchor as? ARImageAnchor else { return }
+        let referenceImage = imageAnchor.referenceImage
+        DispatchQueue.global().async {
+            
+            // Create a plane to visualize the initial position of the detected image.
+            let plane = SCNPlane(width: referenceImage.physicalSize.width,
+                                 height: referenceImage.physicalSize.height * 3)
+            let planeNode = SCNNode(geometry: plane)
+            planeNode.opacity = 0.25
+            
+            /*
+             `SCNPlane` is vertically oriented in its local coordinate space, but
+             `ARImageAnchor` assumes the image is horizontal in its local space, so
+             rotate the plane to match.
+             */
+            planeNode.eulerAngles.x = -.pi / 2
+            
+            /*
+             Image anchors are not tracked after initial detection, so create an
+             animation that limits the duration for which the plane visualization appears.
+             */
+            
+            // Add the plane visualization to the scene.
+            node.addChildNode(planeNode)
+        }
+        
+        DispatchQueue.main.async {
+            let imageName = referenceImage.name ?? ""
+            print("Detected image “\(imageName)”")
+        }
+    }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
@@ -63,5 +105,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
+    }
+}
+
+extension ViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations.last?.coordinate
+        getStationName(location!)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        checkAuthorization(status)
     }
 }
