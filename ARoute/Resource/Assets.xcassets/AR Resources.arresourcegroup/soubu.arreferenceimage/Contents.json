@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "山手線.jpg"
+      "filename" : "総武線.jpg"
     }
   ],
   "info" : {
@@ -10,6 +10,7 @@
     "author" : "xcode"
   },
   "properties" : {
-    "width" : 8
+    "width" : 8,
+    "unit" : "centimeters"
   }
 }

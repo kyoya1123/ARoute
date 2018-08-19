@@ -1,7 +1,6 @@
-import Foundation
 import CoreLocation
 
-class StationGetter {
+final class StationGetter {
     
     static var nearestStation = ""
     

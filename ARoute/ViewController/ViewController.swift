@@ -3,27 +3,25 @@ import ARKit
 import SceneKit
 import CoreLocation
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     @IBOutlet var sceneView: ARSCNView!
     
     var locationManager : CLLocationManager!
+    var destination: String = "新宿"
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         setupLocationManager()
-        scrape()
+//        scrape()
         setupSceneView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         let configuration = setupTrackingConfiguration()
         sceneView.session.run(configuration)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
         sceneView.session.pause()
     }
 }
@@ -102,44 +100,38 @@ fileprivate extension ViewController {
         let dateString = formatter.string(from: Date())
         return dateString.components(separatedBy: ",")
     }
+    
+    func sphereNode(color: UIColor) -> SCNNode {
+        let geometry = SCNSphere(radius: 0.02)
+        geometry.materials.first?.diffuse.contents = color
+        return SCNNode(geometry: geometry)
+    }
+    
+    func putSphere(at pos: SCNVector3, color: UIColor) -> SCNNode {
+        let node = sphereNode(color: color)
+        sceneView.scene.rootNode.addChildNode(node)
+        node.position = pos
+        return node
+    }
 }
 
 extension ViewController: ARSCNViewDelegate {
+    
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         guard let imageAnchor = anchor as? ARImageAnchor else { return }
         let referenceImage = imageAnchor.referenceImage
+        let imageName = referenceImage.name
         DispatchQueue.global().async {
-            
-            // Create a plane to visualize the initial position of the detected image.
-            let plane = SCNPlane(width: referenceImage.physicalSize.width,
-                                 height: referenceImage.physicalSize.height * 3)
-            let planeNode = SCNNode(geometry: plane)
-            planeNode.opacity = 0.25
-            
-            /*
-             `SCNPlane` is vertically oriented in its local coordinate space, but
-             `ARImageAnchor` assumes the image is horizontal in its local space, so
-             rotate the plane to match.
-             */
-            planeNode.eulerAngles.x = -.pi / 2
-            
-            /*
-             Image anchors are not tracked after initial detection, so create an
-             animation that limits the duration for which the plane visualization appears.
-             */
-            
-            // Add the plane visualization to the scene
-            node.addChildNode(planeNode)
-        }
-        
-        DispatchQueue.main.async {
-            let imageName = referenceImage.name ?? ""
-            print("Detected image “\(imageName)”")
+            let color = Route.init(name: imageName!)?.color()
+            for i in 0..<30 {
+                self.putSphere(at: SCNVector3((anchor.transform.columns.3.x - 0.05 * 15) + 0.05 * Float(i), anchor.transform.columns.3.y - 0.01, anchor.transform.columns.3.z - 0.01), color: color!)
+            }
         }
     }
 }
 
 extension ViewController: CLLocationManagerDelegate {
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         StationGetter.getStationName((locations.last?.coordinate)!)
     }
