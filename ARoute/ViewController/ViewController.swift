@@ -12,7 +12,7 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         setupLocationManager()
-//        scrape()
+        scrape()
         setupSceneView()
     }
     
@@ -77,20 +77,22 @@ fileprivate extension ViewController {
     
     func scrape() {
         let doc = Ji(htmlURL: prepareURL())
-        let xPaths = ["//*[@id='route01']/div[4]/div[1]/ul[1]/li",//出発時刻
-                      "//*[@id='route01']/div[4]/div[3]/ul[1]/li",//到着時刻
-                      "//*[@id='route01']/dl/dd[1]/ul/li[1]/text()",//所要時間
-                      "//*[@id='route01']/div[4]/div[2]/div/ul/li[2]/span[1]"]//何番線発
+        let xPaths = ["//*[@id='detail_route_0']/div[1]/div[2]/h3/text()[1]",//出発時刻
+                      "//*[@id='detail_route_0']/div[3]/div[4]/dl[1]/dd/text()",//到着時刻
+                      "//*[@id='detail_route_0']/div[1]/div[2]/dl/dd",//所要時間
+                      "//*[@id='detail_route_0']/div[3]/div[3]/div[2]/ul/li"]//何番線発
         var routeSearchResult = [String]()
         for xPath in xPaths {
             let scrapedText = doc?.xPath(xPath)?.first?.content
-            routeSearchResult.append(scrapedText!)
+            let trimmedText = scrapedText?.trimmingCharacters(in: .whitespacesAndNewlines)
+            routeSearchResult.append(trimmedText!)
         }
+        print(routeSearchResult)
     }
     
     func prepareURL() -> URL {
         let splitDate = prepareSplitDate()
-        let urlString = "https://transit.yahoo.co.jp/search/result?from=\(StationGetter.nearestStation)&to=高田馬場&y=\(splitDate[0])&m=\(splitDate[1])&d=\(splitDate[2])&hh=\(splitDate[3])&m2=\(splitDate[4].suffix(1))&m1=\(splitDate[4].prefix(1))"
+        let urlString = "https://www.navitime.co.jp/transfer/searchlist?orvStationName=新井薬師前&dnvStationName=高田馬場&thrStationName1=&thrStationCode1=&thrStationName2=&thrStationCode2=&thrStationName3=&thrStationCode3=&month=\(splitDate[0])%2F\(splitDate[1])&day=\(splitDate[2])&hour=\(splitDate[3])&minute=\(splitDate[4])&orvStationCode=&dnvStationCode=&basis=1&from=view.transfer.top&sort=0&wspeed=100&airplane=1&sprexprs=1&utrexprs=1&othexprs=1&mtrplbus=1&intercitybus=1&ferry=1&ctl=020010&atr=2&init="
         return URL(string: urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)!
     }
     
@@ -120,11 +122,11 @@ extension ViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         guard let imageAnchor = anchor as? ARImageAnchor else { return }
         let referenceImage = imageAnchor.referenceImage
-        let imageName = referenceImage.name
+        let route = Route(name: referenceImage.name!)!
         DispatchQueue.global().async {
-            let color = Route.init(name: imageName!)?.color()
-            for i in 0..<30 {
-                self.putSphere(at: SCNVector3((anchor.transform.columns.3.x - 0.05 * 15) + 0.05 * Float(i), anchor.transform.columns.3.y - 0.01, anchor.transform.columns.3.z - 0.01), color: color!)
+            let color = route.color()
+            for i in 0..<route.stations().count {
+                self.putSphere(at: SCNVector3((anchor.transform.columns.3.x - 0.05 * 15) + 0.05 * Float(i), anchor.transform.columns.3.y - 0.01, anchor.transform.columns.3.z - 0.01), color: color)
             }
         }
     }
