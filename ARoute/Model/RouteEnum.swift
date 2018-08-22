@@ -30,7 +30,7 @@ enum Route {
         assignColor()
     }
     
-    func assignColor() {
+    private func assignColor() {
         switch Route.currentRoute {
         case .yamanote:
             Route.color = #colorLiteral(red: 0.6941176471, green: 0.7882352941, blue: 0.2745098039, alpha: 1)
