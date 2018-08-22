@@ -11,26 +11,26 @@ enum Route {
     static var stations = [String]()
     static var color = UIColor()
     
-    init?(name: String) {
+    static func info(name: String) {
         switch name {
         case "yamanote":
-            self = .yamanote
+            currentRoute = .yamanote
         case "soubu":
-            self = .soubu
+            currentRoute = .soubu
         case "tyuuou":
-            self = .tyuuou
+            currentRoute = .tyuuou
         case "dennenntoshi":
-            self = .dennenntoshi
+            currentRoute = .dennenntoshi
         case "touyoko":
-            self = .touyoko
-        default: return nil
+            currentRoute = .touyoko
+        default:
+            currentRoute = .yamanote
         }
-        Route.currentRoute = self
         assignStations()
         assignColor()
     }
     
-    private func assignColor() {
+    private static func assignColor() {
         switch Route.currentRoute {
         case .yamanote:
             Route.color = #colorLiteral(red: 0.6941176471, green: 0.7882352941, blue: 0.2745098039, alpha: 1)
@@ -45,7 +45,7 @@ enum Route {
         }
     }
     
-    private func assignStations() {
+    private static func assignStations() {
         switch Route.currentRoute {
         case .yamanote:
             Route.stations = ["東京","有楽町","新橋","浜松町","田町","品川","大崎","五反田","目黒","恵比寿","渋谷","原宿","代々木","新宿","新大久保","高田馬場","目白","池袋","大塚","巣鴨","駒込","田端","西日暮里","日暮里","鶯谷","上野","御徒町","秋葉原","神田"]

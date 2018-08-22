@@ -79,47 +79,25 @@ fileprivate extension ViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func sphereNode(color: UIColor) -> SCNNode {
-        let geometry = SCNSphere(radius: 0.01)
-        geometry.materials.first?.diffuse.contents = color
-        return SCNNode(geometry: geometry)
+    func putStation(at position: SCNVector3, name: String) {
+        var color = Route.color
+        if name == StationGetter.nearestStation {
+            color = .red
+        }
+        putSphere(at: position, color: color, name: name)
+        let textPosition = SCNVector3(position.x, position.y + 0.01, position.z)
+        putText(at: textPosition, name: name)
     }
     
     func putSphere(at pos: SCNVector3, color: UIColor, name: String) {
-        let node = sphereNode(color: color)
+        let node = SCNNode.sphereNode(color: color)
         node.position = pos
         node.name = name
         sceneView.scene.rootNode.addChildNode(node)
     }
     
-    func textNode(text: String) -> SCNNode {
-        let geometry = SCNText(string: text, extrusionDepth: 0.01)
-        geometry.alignmentMode = CATextLayerAlignmentMode.center.rawValue
-        if let material = geometry.firstMaterial {
-            material.diffuse.contents = UIColor.white
-            material.isDoubleSided = true
-        }
-        let textNode = SCNNode(geometry: geometry)
-        
-        geometry.font = UIFont(name: "HiraginoSans-W6", size: 1);
-//            UIFont.systemFont(ofSize: 0.5)
-        textNode.scale = SCNVector3Make(0.02, 0.02, 0.02)
-        
-        // Translate so that the text node can be seen
-        let (min, max) = geometry.boundingBox
-        textNode.pivot = SCNMatrix4MakeTranslation((max.x - min.x)/2, min.y - 0.5, 0)
-        
-        // Always look at the camera
-        let node = SCNNode()
-        let billboardConstraint = SCNBillboardConstraint()
-        billboardConstraint.freeAxes = SCNBillboardAxis.Y
-        node.constraints = [billboardConstraint]
-        node.addChildNode(textNode)
-        return node
-    }
-    
     func putText(at pos: SCNVector3, name: String) {
-        let node = textNode(text: name)
+        let node = SCNNode.textNode(text: name)
         node.position = pos
         sceneView.scene.rootNode.addChildNode(node)
     }
@@ -138,18 +116,27 @@ extension ViewController: ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         guard let imageAnchor = anchor as? ARImageAnchor else { return }
-        let referenceImage = imageAnchor.referenceImage
-        let _ = Route(name: referenceImage.name!)
+        guard let imageName = imageAnchor.referenceImage.name else { return }
+        Route.info(name: imageName)
         DispatchQueue.global().async {
-            let color = Route.color
             let stationCount = Route.stations.count
+            let baseX = anchor.transform.columns.3.x - 0.04 * Float(stationCount)
+            let baseY = anchor.transform.columns.3.y - 0.01
+            let baseZ = anchor.transform.columns.3.z - 0.01
             for i in 0..<stationCount {
-                self.putSphere(at: SCNVector3((anchor.transform.columns.3.x - 0.04 * 15) + 0.04 * Float(i), anchor.transform.columns.3.y - 0.01, anchor.transform.columns.3.z - 0.01), color: color, name: Route.stations[i])
-                self.putText(at: SCNVector3((anchor.transform.columns.3.x - 0.04 * 15) + 0.04 * Float(i), anchor.transform.columns.3.y - 0.01, anchor.transform.columns.3.z + 0.01), name: Route.stations[i])
+                self.putStation(at: SCNVector3(baseX + 0.04 * Float(i), baseY, baseZ), name: Route.stations[i])
             }
         }
     }
 }
+/*
+ 横一列
+ for i in 0..<stationCount {
+ self.putStation(at: SCNVector3((baseX - 0.04 * stationCount) + 0.04 * Float(i), baseY, baseZ), name: Route.stations[i])
+ }
+ 
+ 
+*/
 
 extension ViewController: CLLocationManagerDelegate {
     
