@@ -1,12 +1,13 @@
 import Foundation
+import UIKit
 
 class RouteSearcher {
-    static func scrape(destination: String) {
+    static func scrape(destination: String) -> [String] {
         let doc = Ji(htmlURL: prepareURL(destination: destination))
-        let xPaths = ["//*[@id='detail_route_0']/div[1]/div[2]/h3/text()[1]",//出発時刻
-            "//*[@id='detail_route_0']/div[3]/div[3]/dl[1]/dd/text()",//到着時刻
-            "//*[@id='detail_route_0']/div[1]/div[2]/dl/dd",//所要時間
-            "//*[@id='detail_route_0']/div[3]/div[2]/div[2]/ul/li"]//何番線発
+        let xPaths = ["//*[@id='detail_route_0']/div[3]/div[2]/dl[1]/dd/text()",//出発時刻
+            "//*[@id='detail_route_0']/div[3]/div[4]/dl[1]/dd/text()",//到着時刻
+            "//*[@id='detail_route_0']/div[3]/div[3]/ul/li[1]",//所要時間
+            "//*[@id='detail_route_0']/div[3]/div[3]/div[2]/ul/li"]//何番線発
         var routeSearchResult = [String]()
         for xPath in xPaths {
             let scrapedText = doc?.xPath(xPath)?.first?.content
@@ -14,6 +15,7 @@ class RouteSearcher {
             routeSearchResult.append(trimmedText!)
         }
         print(routeSearchResult)
+        return routeSearchResult
     }
     
     private static func prepareURL(destination: String) -> URL {

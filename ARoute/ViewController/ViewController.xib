@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController" customModule="ARoute" customModuleProvider="target">
             <connections>
+                <outlet property="helpButton" destination="eDO-xm-5rZ" id="1Ry-M3-sSc"/>
+                <outlet property="resetButton" destination="mmu-FE-yKR" id="xCp-sy-HDv"/>
                 <outlet property="sceneView" destination="FZt-ah-bY2" id="Smj-Nj-Np1"/>
                 <outlet property="view" destination="iN0-l3-epB" id="55l-9i-X3c"/>
             </connections>
@@ -24,8 +26,17 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" red="0.69411764705882351" green="0.78823529411764703" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </arscnView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mmu-FE-yKR">
+                    <rect key="frame" x="315" y="20" width="44" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="reset"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eDO-xm-5rZ">
+                    <rect key="frame" x="16" y="20" width="44" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="help"/>
+                </button>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="FZt-ah-bY2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="0w3-HE-Etz"/>
                 <constraint firstItem="FZt-ah-bY2" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="0zd-6x-Bfv"/>
@@ -36,4 +47,8 @@
             <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="help" width="256" height="256"/>
+        <image name="reset" width="256" height="256"/>
+    </resources>
 </document>
