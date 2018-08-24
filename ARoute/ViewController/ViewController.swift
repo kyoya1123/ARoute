@@ -2,6 +2,7 @@ import UIKit
 import ARKit
 import SceneKit
 import CoreLocation
+import UserNotifications
 
 final class ViewController: UIViewController {
     
@@ -10,12 +11,12 @@ final class ViewController: UIViewController {
     @IBOutlet var helpButton: UIButton!
     
     var locationManager: CLLocationManager!
-    var destination: String = "新宿"
     
     override func viewDidLoad() {
         setupLocationManager()
         setupSceneView()
         setupButtons()
+        setupNotification()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,6 +35,23 @@ final class ViewController: UIViewController {
 }
 
 fileprivate extension ViewController {
+    
+    func setupNotification() {
+        checkNotificationAuthorization()
+        let trigger: UNNotificationTrigger
+        let  region = CLCircularRegion(center: DestinationGetter.coordinate, radius: 500, identifier: "destination")
+        region.notifyOnEntry = true
+        region.notifyOnExit = false
+        trigger = UNLocationNotificationTrigger(region: region, repeats: false)
+        let content = UNMutableNotificationContent()
+        content.title = "東中野"
+        content.body = "目的地に到着"
+        content.sound = UNNotificationSound.default
+        
+        
+        let request = UNNotificationRequest(identifier: "uuid", content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+    }
     
     func setupButtons() {
         resetButton.addTarget(self, action: #selector(didtapReset), for: .touchUpInside)
@@ -75,12 +93,22 @@ fileprivate extension ViewController {
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.distanceFilter = 100
+        locationManager.allowsBackgroundLocationUpdates = true
         locationManager.delegate = self
         let status = CLLocationManager.authorizationStatus()
-        checkAuthorization(status)
+        checkLocationAuthorization(status)
     }
     
-    func checkAuthorization(_ status: CLAuthorizationStatus) {
+    func checkNotificationAuthorization() {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound]) {(granted, error) in
+            if !granted {
+                print("通知オンにしねえとダメよ")
+            }
+        }
+    }
+    
+    func checkLocationAuthorization(_ status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined:
             locationManager.requestAlwaysAuthorization()
@@ -111,7 +139,7 @@ fileprivate extension ViewController {
     
     func putStation(at position: SCNVector3, name: String) {
         var color = Route.color
-        if name == StationGetter.nearestStation {
+        if name == StationGetter.stationName {
             color = complementaryColor(baseColor: Route.color)
         }
         putSphere(at: position, color: color, name: name)
@@ -137,9 +165,10 @@ fileprivate extension ViewController {
         if hitResults.count != 0 {
             let resultNode = hitResults[0].node
             print(resultNode.name!)
-            if resultNode.name != StationGetter.nearestStation {
+            if resultNode.name != StationGetter.stationName {
                 let result = RouteSearcher.scrape(destination: resultNode.name!)
-                let alert = UIAlertController(title: "結果結果", message: "\(result[0]),\(result[1]),\(result[2]),\(result[3])", preferredStyle: .alert)
+                DestinationGetter.getLocation(destination: resultNode.name!)
+                let alert = UIAlertController(title: "結果結果", message: "\(result[0]),\(result[1]),\(result[2])", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 present(alert, animated: true, completion: nil)
             }
@@ -199,6 +228,13 @@ extension ViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        checkAuthorization(status)
+        checkLocationAuthorization(status)
+    }
+}
+
+extension ViewController: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
     }
 }

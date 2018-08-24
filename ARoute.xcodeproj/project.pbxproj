@@ -21,6 +21,7 @@
 		9C9E41492128D37200D2500C /* SearchedRouteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C9E41472128D37200D2500C /* SearchedRouteViewController.xib */; };
 		9CBEC557212D32EE00CE4A70 /* RouteSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBEC556212D32EE00CE4A70 /* RouteSearcher.swift */; };
 		9CBEC559212D41FC00CE4A70 /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBEC558212D41FC00CE4A70 /* Objects.swift */; };
+		9CC6FF9E212FCD590005197F /* DestinationGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC6FF9D212FCD590005197F /* DestinationGetter.swift */; };
 		9CEE4EB52127C647000DB960 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEE4EB42127C647000DB960 /* libxml2.tbd */; };
 		9CEE4EB72127C64D000DB960 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEE4EB62127C64D000DB960 /* libxml2.2.tbd */; };
 		9CEE4EBC2127C722000DB960 /* JiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEE4EB92127C722000DB960 /* JiHelper.swift */; };
@@ -45,6 +46,7 @@
 		9C9E41472128D37200D2500C /* SearchedRouteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchedRouteViewController.xib; sourceTree = "<group>"; };
 		9CBEC556212D32EE00CE4A70 /* RouteSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteSearcher.swift; sourceTree = "<group>"; };
 		9CBEC558212D41FC00CE4A70 /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
+		9CC6FF9D212FCD590005197F /* DestinationGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationGetter.swift; sourceTree = "<group>"; };
 		9CEE4EB42127C647000DB960 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		9CEE4EB62127C64D000DB960 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		9CEE4EB82127C6A5000DB960 /* ARoute-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ARoute-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			children = (
 				9C9E41402128CB9D00D2500C /* Ji */,
 				9C915BDC21250FE10036DE40 /* ResponseStruct.swift */,
+				9CC6FF9D212FCD590005197F /* DestinationGetter.swift */,
 				9C915BDA21250F210036DE40 /* StationGetter.swift */,
 				9C371E682129154E0003B58E /* RouteEnum.swift */,
 				9CBEC556212D32EE00CE4A70 /* RouteSearcher.swift */,
@@ -231,6 +234,7 @@
 				9C7A84DF20F08E0E00CEA484 /* AppDelegate.swift in Sources */,
 				9C9E41482128D37200D2500C /* SearchedRouteViewController.swift in Sources */,
 				9CEE4EBD2127C722000DB960 /* Ji.swift in Sources */,
+				9CC6FF9E212FCD590005197F /* DestinationGetter.swift in Sources */,
 				9C915BDB21250F210036DE40 /* StationGetter.swift in Sources */,
 				9CEE4EBC2127C722000DB960 /* JiHelper.swift in Sources */,
 				9C371E692129154E0003B58E /* RouteEnum.swift in Sources */,
