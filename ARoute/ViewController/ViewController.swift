@@ -2,24 +2,23 @@ import UIKit
 import ARKit
 import SceneKit
 import CoreLocation
-import UserNotifications
 
 final class ViewController: UIViewController {
     
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet var resetButton: UIButton!
     @IBOutlet var helpButton: UIButton!
+    @IBOutlet var frameImageView: UIImageView!
     
     var locationManager: CLLocationManager!
     
     override func viewDidLoad() {
         setupLocationManager()
-        setupSceneView()
-        setupButtons()
-        setupNotification()
+        setupView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        resetTracking()
         sceneView.session.run(setupTrackingConfiguration())
     }
     
@@ -36,21 +35,9 @@ final class ViewController: UIViewController {
 
 fileprivate extension ViewController {
     
-    func setupNotification() {
-        checkNotificationAuthorization()
-        let trigger: UNNotificationTrigger
-        let  region = CLCircularRegion(center: DestinationGetter.coordinate, radius: 500, identifier: "destination")
-        region.notifyOnEntry = true
-        region.notifyOnExit = false
-        trigger = UNLocationNotificationTrigger(region: region, repeats: false)
-        let content = UNMutableNotificationContent()
-        content.title = "東中野"
-        content.body = "目的地に到着"
-        content.sound = UNNotificationSound.default
-        
-        
-        let request = UNNotificationRequest(identifier: "uuid", content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+    func setupView() {
+        setupButtons()
+        setupSceneView()
     }
     
     func setupButtons() {
@@ -59,13 +46,7 @@ fileprivate extension ViewController {
     }
     
     @objc func didtapReset() {
-        guard let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil) else { return }
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.detectionImages = referenceImages
-        sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
-        sceneView.scene.rootNode.enumerateChildNodes { node, arg   in
-            node.removeFromParentNode()
-        }
+        resetTracking()
     }
     
     @objc func didtapHelp() {
@@ -77,6 +58,17 @@ fileprivate extension ViewController {
         #if DEBUG
         sceneView.showsStatistics = true
         #endif
+    }
+    
+    func resetTracking() {
+        guard let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil) else { return }
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.detectionImages = referenceImages
+        sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+        sceneView.scene.rootNode.enumerateChildNodes { node, arg   in
+            node.removeFromParentNode()
+        }
+        view.bringSubviewToFront(frameImageView)
     }
     
     func setupTrackingConfiguration() -> ARWorldTrackingConfiguration {
@@ -97,15 +89,6 @@ fileprivate extension ViewController {
         locationManager.delegate = self
         let status = CLLocationManager.authorizationStatus()
         checkLocationAuthorization(status)
-    }
-    
-    func checkNotificationAuthorization() {
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .sound]) {(granted, error) in
-            if !granted {
-                print("通知オンにしねえとダメよ")
-            }
-        }
     }
     
     func checkLocationAuthorization(_ status: CLAuthorizationStatus) {
@@ -163,14 +146,13 @@ fileprivate extension ViewController {
     func tappedScreen(_ position: CGPoint) {
         let hitResults = sceneView.hitTest(position, options: [:])
         if hitResults.count != 0 {
-            let resultNode = hitResults[0].node
-            print(resultNode.name!)
-            if resultNode.name != StationGetter.stationName {
-                let result = RouteSearcher.scrape(destination: resultNode.name!)
-                DestinationGetter.getLocation(destination: resultNode.name!)
-                let alert = UIAlertController(title: "結果結果", message: "\(result[0]),\(result[1]),\(result[2])", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                present(alert, animated: true, completion: nil)
+            let nodeName = hitResults[0].node.name
+            print(nodeName ?? "Error")
+            if nodeName != StationGetter.stationName {
+                DestinationGetter.getLocation(destination: nodeName!)
+                let routeView = SearchedRouteViewController()
+                routeView.destination = nodeName
+                present(routeView, animated: true, completion: nil)
             }
         }
     }
@@ -181,8 +163,11 @@ extension ViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         guard let imageAnchor = anchor as? ARImageAnchor else { return }
         guard let imageName = imageAnchor.referenceImage.name else { return }
-        Route.info(name: imageName)
+        DispatchQueue.main.sync {
+            view.sendSubviewToBack(frameImageView)
+        }
         DispatchQueue.global().async {
+            Route.info(name: imageName)
             let stationCount = Route.stations.count
             let baseX = anchor.transform.columns.3.x - 0.04 * Float(stationCount / 2)
             let baseY = anchor.transform.columns.3.y - 0.01
@@ -229,12 +214,5 @@ extension ViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkLocationAuthorization(status)
-    }
-}
-
-extension ViewController: UNUserNotificationCenterDelegate {
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert, .sound])
     }
 }

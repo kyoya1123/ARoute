@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController" customModule="ARoute" customModuleProvider="target">
             <connections>
+                <outlet property="frameImageView" destination="YVV-Zv-TZY" id="6YU-c0-uCB"/>
                 <outlet property="helpButton" destination="eDO-xm-5rZ" id="1Ry-M3-sSc"/>
                 <outlet property="resetButton" destination="mmu-FE-yKR" id="xCp-sy-HDv"/>
                 <outlet property="sceneView" destination="FZt-ah-bY2" id="Smj-Nj-Np1"/>
@@ -36,6 +37,10 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="help"/>
                 </button>
+                <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="frame" translatesAutoresizingMaskIntoConstraints="NO" id="YVV-Zv-TZY">
+                    <rect key="frame" x="37" y="183" width="300" height="300"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <constraints>
                 <constraint firstItem="FZt-ah-bY2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="0w3-HE-Etz"/>
@@ -48,6 +53,7 @@
         </view>
     </objects>
     <resources>
+        <image name="frame" width="750" height="726"/>
         <image name="help" width="256" height="256"/>
         <image name="reset" width="256" height="256"/>
     </resources>

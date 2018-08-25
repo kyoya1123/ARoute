@@ -2,19 +2,29 @@ import Foundation
 import UIKit
 
 class RouteSearcher {
-    static func scrape(destination: String) -> [String] {
+    
+    static var searchResult = [String]()
+    
+    static func scrape(destination: String) {
         let doc = Ji(htmlURL: prepareURL(destination: destination))
         let xPaths = ["//*[@id='left_pane']/ol[1]/li[1]/dl/dt",//出発到着時刻
-            "//*[@id='detail_route_1']/div[1]/div[2]/dl/dd",//所要時間
+            "//*[@id='detail_route_0']/div[1]/div[2]/dl/dd",//所要時間
             "//*[@id='detail_route_0']/div[3]/div[2]/div[2]/ul/li"]//何番線発
         var routeSearchResult = [String]()
         for xPath in xPaths {
             let scrapedText = doc?.xPath(xPath)?.first?.content
             let trimmedText = scrapedText?.trimmingCharacters(in: .whitespacesAndNewlines)
+            if routeSearchResult.count == 0 {
+                routeSearchResult.append(String((trimmedText?.prefix(5))!))
+                routeSearchResult.append(String((trimmedText?.suffix(5))!))
+                continue
+            }
             routeSearchResult.append(trimmedText!)
         }
+        routeSearchResult[2] = String(routeSearchResult[2].dropLast())
+        routeSearchResult[3] = routeSearchResult[3].prefix(1).applyingTransform(.fullwidthToHalfwidth, reverse: false)!
         print(routeSearchResult)
-        return routeSearchResult
+        searchResult = routeSearchResult
     }
     
     private static func prepareURL(destination: String) -> URL {

@@ -14,7 +14,7 @@ final class StationGetter {
                 let object = try decoder.decode(ResponseData.self, from: jsonData)
                 let result = object.response.station[0].name
                 //            nearestStation = result
-                stationName = "新宿"
+                stationName = "東中野"
                 print(result)
             }
             catch {
