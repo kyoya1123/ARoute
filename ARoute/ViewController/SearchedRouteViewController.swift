@@ -14,10 +14,15 @@ final class SearchedRouteViewController: UIViewController {
     @IBOutlet var notificationSwitch: UISwitch!
     
     var destination: String!
+    var locationManager: CLLocationManager!
     
     override func viewDidLoad() {
-        RouteSearcher.scrape(destination: destination)
-        setupView()
+        DispatchQueue.global(qos: .background).async {
+            RouteSearcher.scrape(destination: self.destination)
+            DispatchQueue.main.async {
+                self.setupView()
+            }
+        }
     }
 }
 
@@ -34,9 +39,10 @@ fileprivate extension SearchedRouteViewController {
         leavingTimeLabel.text = RouteSearcher.searchResult[0]
         arrivingTimeLabel.text = RouteSearcher.searchResult[1]
         //TODO: 時間の時
-        durationLabel.text = RouteSearcher.searchResult[2] + "min"
+        durationLabel.text = RouteSearcher.searchResult[2]
         platformLabel.text = RouteSearcher.searchResult[3]
     }
+    
     
     func setupButton() {
         closeButton.addTarget(self, action: #selector(didtapClose), for: .touchUpInside)
@@ -52,8 +58,12 @@ fileprivate extension SearchedRouteViewController {
     }
     
     @objc func didtapReload() {
-        RouteSearcher.scrape(destination: destination)
-        updateLabels()
+        DispatchQueue.global(qos: .background).async {
+            RouteSearcher.scrape(destination: self.destination)
+            DispatchQueue.main.async {
+                self.setupView()
+            }
+        }
     }
     
     @objc func didSwitched(_ sender: UISwitch) {
@@ -93,6 +103,13 @@ fileprivate extension SearchedRouteViewController {
         content.body = "まもなく到着します"
         content.sound = UNNotificationSound.default
         let request = UNNotificationRequest(identifier: "arriving", content: content, trigger: trigger)
+        UNUserNotificationCenter.current().getPendingNotificationRequests { (requests) in
+            for request in requests{
+                if request.content.categoryIdentifier == "destination"{
+                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["destination"])
+                }
+            }
+        }
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
     
@@ -120,6 +137,6 @@ fileprivate extension SearchedRouteViewController {
 
 extension SearchedRouteViewController: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert, .sound])
+        completionHandler(UNNotificationPresentationOptions.sound)
     }
 }

@@ -96,13 +96,13 @@ fileprivate extension ViewController {
         case .notDetermined:
             locationManager.requestAlwaysAuthorization()
         case .restricted, .denied:
-            showAlert()
+            showLocationAlert()
         case .authorizedWhenInUse, .authorizedAlways:
             locationManager.startUpdatingLocation()
         }
     }
     
-    func showAlert() {
+    func showLocationAlert() {
         let alert = UIAlertController(title: "位置情報の使用が許可されていません", message: "設定を変更する", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             if let url = URL(string: "\(UIApplication.openSettingsURLString)&path=LOCATION") {
@@ -126,7 +126,7 @@ fileprivate extension ViewController {
             color = complementaryColor(baseColor: Route.color)
         }
         putSphere(at: position, color: color, name: name)
-        let textPosition = SCNVector3(position.x, position.y + 0.01, position.z)
+        let textPosition = SCNVector3(position.x, position.y - 0.01, position.z + 0.02)
         putText(at: textPosition, name: name)
     }
     
@@ -152,6 +152,7 @@ fileprivate extension ViewController {
                 DestinationGetter.getLocation(destination: nodeName!)
                 let routeView = SearchedRouteViewController()
                 routeView.destination = nodeName
+                routeView.locationManager = locationManager
                 present(routeView, animated: true, completion: nil)
             }
         }
@@ -163,46 +164,21 @@ extension ViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         guard let imageAnchor = anchor as? ARImageAnchor else { return }
         guard let imageName = imageAnchor.referenceImage.name else { return }
+        print(imageName)
         DispatchQueue.main.sync {
             view.sendSubviewToBack(frameImageView)
         }
-        DispatchQueue.global().async {
-            Route.info(name: imageName)
-            let stationCount = Route.stations.count
-            let baseX = anchor.transform.columns.3.x - 0.04 * Float(stationCount / 2)
-            let baseY = anchor.transform.columns.3.y - 0.01
-            let baseZ = anchor.transform.columns.3.z - 0.01
-            for i in 0..<stationCount {
-                self.putStation(at: SCNVector3(baseX + 0.04 * Float(i), baseY, baseZ), name: Route.stations[i])
-            }
-            //            let spaceSize = 0.04
-            //            var stationArray = [[String]]()
-            //            switch stationCount % 3 {
-            //            case 0:
-            //                let index = stationCount / 3
-            //                stationArray.append(Array(Route.stations[0..<index]))
-            //                stationArray.append(Array(Route.stations[index..<index*2]))
-            //                stationArray.append(Array(Route.stations[index*2..<stationCount - 1]))
-            //            case 1:
-            //                print("")
-            //            case 2:
-            //                print("")
-            //            default: break
-            //            }
-            //
-            //            for i in 0..<stationArray[0].count {
-            //
-            //            }
+        Route.info(name: imageName)
+        let stationCount = Route.stations.count
+        let baseX = anchor.transform.columns.3.x
+        let baseY = anchor.transform.columns.3.y - 0.01
+        let baseZ = anchor.transform.columns.3.z - 0.01
+        let coordinateData = Route.coordinate
+        for i in 0..<stationCount {
+            self.putStation(at: SCNVector3(baseX + coordinateData[i][0] * 3, baseY + coordinateData[i][1] * 3, baseZ), name: Route.stations[i])
         }
     }
 }
-/*
- 横一列
- for i in 0..<stationCount {
- - 0.04 * Float(stationCount)
- self.putStation(at: SCNVector3(baseX + 0.04 * Float(i), baseY, baseZ), name: Route.stations[i])
- }
- */
 
 extension ViewController: CLLocationManagerDelegate {
     

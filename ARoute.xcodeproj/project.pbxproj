@@ -22,6 +22,7 @@
 		9CBEC557212D32EE00CE4A70 /* RouteSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBEC556212D32EE00CE4A70 /* RouteSearcher.swift */; };
 		9CBEC559212D41FC00CE4A70 /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBEC558212D41FC00CE4A70 /* Objects.swift */; };
 		9CC6FF9E212FCD590005197F /* DestinationGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC6FF9D212FCD590005197F /* DestinationGetter.swift */; };
+		9CC6FFA021311A490005197F /* TutorialPageViewStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CC6FF9F21311A490005197F /* TutorialPageViewStoryboard.storyboard */; };
 		9CEE4EB52127C647000DB960 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEE4EB42127C647000DB960 /* libxml2.tbd */; };
 		9CEE4EB72127C64D000DB960 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEE4EB62127C64D000DB960 /* libxml2.2.tbd */; };
 		9CEE4EBC2127C722000DB960 /* JiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEE4EB92127C722000DB960 /* JiHelper.swift */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		9C371E662128F14B0003B58E /* Kano.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Kano.otf; sourceTree = "<group>"; };
 		9C371E682129154E0003B58E /* RouteEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteEnum.swift; sourceTree = "<group>"; };
+		9C5A8C7A2131863F00CAF4C0 /* CoordinateGetter.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = CoordinateGetter.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9C7A84DB20F08E0E00CEA484 /* ARoute.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARoute.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C7A84DE20F08E0E00CEA484 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C7A84E020F08E0E00CEA484 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -47,6 +49,8 @@
 		9CBEC556212D32EE00CE4A70 /* RouteSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteSearcher.swift; sourceTree = "<group>"; };
 		9CBEC558212D41FC00CE4A70 /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 		9CC6FF9D212FCD590005197F /* DestinationGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationGetter.swift; sourceTree = "<group>"; };
+		9CC6FF9F21311A490005197F /* TutorialPageViewStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TutorialPageViewStoryboard.storyboard; sourceTree = "<group>"; };
+		9CC6FFA2213172990005197F /* LineGetter.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LineGetter.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9CEE4EB42127C647000DB960 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		9CEE4EB62127C64D000DB960 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		9CEE4EB82127C6A5000DB960 /* ARoute-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ARoute-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -112,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				9C7A84DE20F08E0E00CEA484 /* AppDelegate.swift */,
+				9CC6FF9F21311A490005197F /* TutorialPageViewStoryboard.storyboard */,
 				9C7A84E220F08E0E00CEA484 /* ViewController.swift */,
 				9C9E41442128CCDA00D2500C /* ViewController.xib */,
 				9C9E41462128D37200D2500C /* SearchedRouteViewController.swift */,
@@ -134,14 +139,24 @@
 			isa = PBXGroup;
 			children = (
 				9C9E41402128CB9D00D2500C /* Ji */,
-				9C915BDC21250FE10036DE40 /* ResponseStruct.swift */,
-				9CC6FF9D212FCD590005197F /* DestinationGetter.swift */,
 				9C915BDA21250F210036DE40 /* StationGetter.swift */,
-				9C371E682129154E0003B58E /* RouteEnum.swift */,
+				9CC6FF9D212FCD590005197F /* DestinationGetter.swift */,
+				9C915BDC21250FE10036DE40 /* ResponseStruct.swift */,
 				9CBEC556212D32EE00CE4A70 /* RouteSearcher.swift */,
+				9C371E682129154E0003B58E /* RouteEnum.swift */,
 				9CBEC558212D41FC00CE4A70 /* Objects.swift */,
+				9CC6FFA12131726B0005197F /* ForDevelop */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		9CC6FFA12131726B0005197F /* ForDevelop */ = {
+			isa = PBXGroup;
+			children = (
+				9CC6FFA2213172990005197F /* LineGetter.playground */,
+				9C5A8C7A2131863F00CAF4C0 /* CoordinateGetter.playground */,
+			);
+			path = ForDevelop;
 			sourceTree = "<group>";
 		};
 		9CEE4EB32127C647000DB960 /* Frameworks */ = {
@@ -220,6 +235,7 @@
 				9C7A84E120F08E0E00CEA484 /* art.scnassets in Resources */,
 				9C371E672128F14B0003B58E /* Kano.otf in Resources */,
 				9C7A84EB20F08E1000CEA484 /* LaunchScreen.storyboard in Resources */,
+				9CC6FFA021311A490005197F /* TutorialPageViewStoryboard.storyboard in Resources */,
 				9C7A84E820F08E1000CEA484 /* Assets.xcassets in Resources */,
 				9C9E41492128D37200D2500C /* SearchedRouteViewController.xib in Resources */,
 			);
