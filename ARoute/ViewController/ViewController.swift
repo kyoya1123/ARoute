@@ -11,6 +11,7 @@ final class ViewController: UIViewController {
     @IBOutlet var frameImageView: UIImageView!
     
     var locationManager: CLLocationManager!
+    var currentLine: Line!
     
     override func viewDidLoad() {
         setupLocationManager()
@@ -121,9 +122,9 @@ fileprivate extension ViewController {
     }
     
     func putStation(at position: SCNVector3, name: String) {
-        var color = Route.color
+        var color = Line.color(currentLine)
         if name == StationGetter.stationName {
-            color = complementaryColor(baseColor: Route.color)
+            color = complementaryColor(baseColor: Line.color(currentLine))
         }
         putSphere(at: position, color: color, name: name)
         let textPosition = SCNVector3(position.x, position.y - 0.01, position.z + 0.02)
@@ -157,25 +158,51 @@ fileprivate extension ViewController {
             }
         }
     }
+    
+    func setLine(name: String) {
+        switch name {
+        case "yamanote":
+            currentLine = .yamanote
+        case "soubu":
+            currentLine = .soubu
+        case "tyuuou":
+            currentLine = .tyuuou
+        case "dennenntoshi":
+            currentLine = .dennenntoshi
+        case "touyoko":
+            currentLine = .touyoko
+        case "marunouchi":
+            currentLine = .marunouchi
+        case "ginza":
+            currentLine = .ginza
+        case "touzai":
+            currentLine = .touzai
+        default:
+            currentLine = .yamanote
+        }
+    }
 }
 
 extension ViewController: ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        sceneView.scene.rootNode.enumerateChildNodes { node, arg   in
+            node.removeFromParentNode()
+        }
         guard let imageAnchor = anchor as? ARImageAnchor else { return }
         guard let imageName = imageAnchor.referenceImage.name else { return }
         print(imageName)
         DispatchQueue.main.sync {
             view.sendSubviewToBack(frameImageView)
         }
-        Route.info(name: imageName)
-        let stationCount = Route.stations.count
+        setLine(name: imageName)
         let baseX = anchor.transform.columns.3.x
         let baseY = anchor.transform.columns.3.y - 0.01
         let baseZ = anchor.transform.columns.3.z - 0.01
-        let coordinateData = Route.coordinate
-        for i in 0..<stationCount {
-            self.putStation(at: SCNVector3(baseX + coordinateData[i][0] * 3, baseY + coordinateData[i][1] * 3, baseZ), name: Route.stations[i])
+        let coordinateData = Line.coordinate(currentLine)
+        let stations = Line.stations(currentLine)
+        for i in 0..<stations.count {
+            self.putStation(at: SCNVector3(baseX + coordinateData[i][0] * 3, baseY + coordinateData[i][1] * 3, baseZ), name: stations[i])
         }
     }
 }

@@ -38,7 +38,6 @@ fileprivate extension SearchedRouteViewController {
         destinationLabel.text = destination
         leavingTimeLabel.text = RouteSearcher.searchResult[0]
         arrivingTimeLabel.text = RouteSearcher.searchResult[1]
-        //TODO: 時間の時
         durationLabel.text = RouteSearcher.searchResult[2]
         platformLabel.text = RouteSearcher.searchResult[3]
     }

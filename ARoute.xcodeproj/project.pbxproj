@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9C371E672128F14B0003B58E /* Kano.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9C371E662128F14B0003B58E /* Kano.otf */; };
-		9C371E692129154E0003B58E /* RouteEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C371E682129154E0003B58E /* RouteEnum.swift */; };
+		9C371E692129154E0003B58E /* LineEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C371E682129154E0003B58E /* LineEnum.swift */; };
 		9C7A84DF20F08E0E00CEA484 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7A84DE20F08E0E00CEA484 /* AppDelegate.swift */; };
 		9C7A84E120F08E0E00CEA484 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C7A84E020F08E0E00CEA484 /* art.scnassets */; };
 		9C7A84E320F08E0E00CEA484 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7A84E220F08E0E00CEA484 /* ViewController.swift */; };
@@ -32,7 +32,7 @@
 
 /* Begin PBXFileReference section */
 		9C371E662128F14B0003B58E /* Kano.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Kano.otf; sourceTree = "<group>"; };
-		9C371E682129154E0003B58E /* RouteEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteEnum.swift; sourceTree = "<group>"; };
+		9C371E682129154E0003B58E /* LineEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineEnum.swift; sourceTree = "<group>"; };
 		9C5A8C7A2131863F00CAF4C0 /* CoordinateGetter.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = CoordinateGetter.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9C7A84DB20F08E0E00CEA484 /* ARoute.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARoute.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C7A84DE20F08E0E00CEA484 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -143,7 +143,7 @@
 				9CC6FF9D212FCD590005197F /* DestinationGetter.swift */,
 				9C915BDC21250FE10036DE40 /* ResponseStruct.swift */,
 				9CBEC556212D32EE00CE4A70 /* RouteSearcher.swift */,
-				9C371E682129154E0003B58E /* RouteEnum.swift */,
+				9C371E682129154E0003B58E /* LineEnum.swift */,
 				9CBEC558212D41FC00CE4A70 /* Objects.swift */,
 				9CC6FFA12131726B0005197F /* ForDevelop */,
 			);
@@ -258,7 +258,7 @@
 				9CC6FF9E212FCD590005197F /* DestinationGetter.swift in Sources */,
 				9C915BDB21250F210036DE40 /* StationGetter.swift in Sources */,
 				9CEE4EBC2127C722000DB960 /* JiHelper.swift in Sources */,
-				9C371E692129154E0003B58E /* RouteEnum.swift in Sources */,
+				9C371E692129154E0003B58E /* LineEnum.swift in Sources */,
 				9C915BDD21250FE10036DE40 /* ResponseStruct.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

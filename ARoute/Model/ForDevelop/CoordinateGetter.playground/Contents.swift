@@ -49,4 +49,3 @@ func calculateCoordinate(result: [[Float]]) {
 }
 
 calculateCoordinate(result: getLineData(line: "東京メトロ銀座線"))
-//銀座, 山手, 総武, 中央, 東横, 田園都市, 東西線,

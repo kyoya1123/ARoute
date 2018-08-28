@@ -18,7 +18,7 @@ extension SCNNode {
         geometry.font = UIFont.systemFont(ofSize: 0.5)
         textNode.scale = SCNVector3Make(0.02, 0.02, 0.02)
         let (min, max) = geometry.boundingBox
-        textNode.pivot = SCNMatrix4MakeTranslation((max.x - min.x)/2, min.y - 0.5, 0)
+        textNode.pivot = SCNMatrix4MakeTranslation((max.x - min.x) / 2, min.y - 0.5, 0)
         let node = SCNNode()
         let billboardConstraint = SCNBillboardConstraint()
         billboardConstraint.freeAxes = SCNBillboardAxis.Y
