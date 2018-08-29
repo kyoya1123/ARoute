@@ -226,7 +226,7 @@ extension ViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         DispatchQueue.global().async {
-//            StationGetter.getStationName((locations.last?.coordinate)!)
+            StationGetter.getStationName((locations.last?.coordinate)!)
         }
     }
     
