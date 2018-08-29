@@ -32,6 +32,15 @@ final class ViewController: UIViewController {
         let position = touch.location(in: sceneView)
         tappedScreen(position)
     }
+    
+    override func viewDidLayoutSubviews() {
+        let userDefault = UserDefaults.standard
+        let launched = userDefault.bool(forKey: "launched")
+        if !launched {
+            showTutorial()
+            userDefault.set(true, forKey: "launched")
+        }
+    }
 }
 
 fileprivate extension ViewController {
@@ -51,7 +60,7 @@ fileprivate extension ViewController {
     }
     
     @objc func didtapHelp() {
-        
+        showTutorial()
     }
     
     func setupSceneView() {
@@ -59,6 +68,12 @@ fileprivate extension ViewController {
         #if DEBUG
         sceneView.showsStatistics = true
         #endif
+    }
+    
+    func showTutorial() {
+        let storyboard: UIStoryboard = UIStoryboard(name: "Tutorial", bundle: nil)
+        let next = storyboard.instantiateInitialViewController() as! PageViewController
+        present(next, animated: true, completion: nil)
     }
     
     func resetTracking() {
@@ -211,7 +226,7 @@ extension ViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         DispatchQueue.global().async {
-            StationGetter.getStationName((locations.last?.coordinate)!)
+//            StationGetter.getStationName((locations.last?.coordinate)!)
         }
     }
     
