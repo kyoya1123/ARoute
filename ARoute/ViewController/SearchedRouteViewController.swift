@@ -14,10 +14,14 @@ final class SearchedRouteViewController: UIViewController {
     var locationManager: CLLocationManager!
     
     override func viewDidLoad() {
+        setupView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         DispatchQueue.global(qos: .background).async {
             RouteSearcher.scrape(destination: self.destination)
             DispatchQueue.main.async {
-                self.setupView()
+                self.updateLabels()
             }
         }
     }
@@ -26,7 +30,7 @@ final class SearchedRouteViewController: UIViewController {
 fileprivate extension SearchedRouteViewController {
     
     func setupView() {
-        updateLabels()
+        setupDescriptions()
         setupButton()
         setupSwitch()
     }
@@ -35,6 +39,9 @@ fileprivate extension SearchedRouteViewController {
         for i in 0..<resultLabels.count {
             resultLabels[i].text = RouteSearcher.searchResult[i]
         }
+    }
+    
+    func setupDescriptions() {
         let descriptions =
             [NSLocalizedString("destination", comment: ""),
              NSLocalizedString("departure", comment: ""),
@@ -42,11 +49,11 @@ fileprivate extension SearchedRouteViewController {
              NSLocalizedString("duration", comment: ""),
              NSLocalizedString("platform", comment: ""),
              NSLocalizedString("notification", comment: "")]
+        
         for i in 0..<descriptionLabels.count {
             descriptionLabels[i].text = descriptions[i]
         }
     }
-    
     
     func setupButton() {
         closeButton.addTarget(self, action: #selector(didtapClose), for: .touchUpInside)
