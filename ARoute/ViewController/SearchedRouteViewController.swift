@@ -6,11 +6,8 @@ final class SearchedRouteViewController: UIViewController {
     
     @IBOutlet var closeButton: UIButton!
     @IBOutlet var reloadButton: UIButton!
-    @IBOutlet var destinationLabel: UILabel!
-    @IBOutlet var leavingTimeLabel: UILabel!
-    @IBOutlet var arrivingTimeLabel: UILabel!
-    @IBOutlet var durationLabel: UILabel!
-    @IBOutlet var platformLabel: UILabel!
+    @IBOutlet var descriptionLabels: [UILabel]!
+    @IBOutlet var resultLabels: [UILabel]!
     @IBOutlet var notificationSwitch: UISwitch!
     
     var destination: String!
@@ -35,11 +32,19 @@ fileprivate extension SearchedRouteViewController {
     }
     
     func updateLabels() {
-        destinationLabel.text = destination
-        leavingTimeLabel.text = RouteSearcher.searchResult[0]
-        arrivingTimeLabel.text = RouteSearcher.searchResult[1]
-        durationLabel.text = RouteSearcher.searchResult[2]
-        platformLabel.text = RouteSearcher.searchResult[3]
+        for i in 0..<resultLabels.count {
+            resultLabels[i].text = RouteSearcher.searchResult[i]
+        }
+        let descriptions =
+            [NSLocalizedString("destination", comment: ""),
+             NSLocalizedString("departure", comment: ""),
+             NSLocalizedString("arrival", comment: ""),
+             NSLocalizedString("duration", comment: ""),
+             NSLocalizedString("platform", comment: ""),
+             NSLocalizedString("notification", comment: "")]
+        for i in 0..<descriptionLabels.count {
+            descriptionLabels[i].text = descriptions[i]
+        }
     }
     
     
@@ -101,7 +106,7 @@ fileprivate extension SearchedRouteViewController {
         trigger = UNLocationNotificationTrigger(region: region, repeats: false)
         let content = UNMutableNotificationContent()
         content.title = NSLocalizedString("notificationTitle", comment: "")
-        content.body = destination
+        content.body = RouteSearcher.searchResult[0]
         content.sound = UNNotificationSound.default
         let request = UNNotificationRequest(identifier: "destination", content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)

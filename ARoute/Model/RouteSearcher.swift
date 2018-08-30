@@ -7,28 +7,31 @@ class RouteSearcher {
     
     static func scrape(destination: String) {
         let doc = Ji(htmlURL: RouteSearcher.prepareURL(destination: destination))
-        let xPaths = ["//*[@id='left_pane']/ol[1]/li[1]/dl/dt", //出発到着時刻
-            "//*[@id='detail_route_0']/div[1]/div[2]/dl/dd", //所要時間
-            "//*[@id='detail_route_0']/div[3]/div[2]/div[2]/ul/li",
-            "//*[@id='detail_route_0']/div[3]/div[3]/div[2]/ul/li"] //何番線発
+        let xPaths = ["//*[@id='left_pane']/h1/strong[2]",//destination
+            "//*[@id='left_pane']/ol[1]/li[1]/dl/dt", //time
+            "//*[@id='detail_route_0']/div[1]/div[2]/dl/dd", //duration
+            "//*[@id='detail_route_0']/div[3]/div[2]/ul/li[1]",//duration
+            "//*[@id='detail_route_0']/div[3]/div[2]/div[2]/ul/li",//platform
+            "//*[@id='detail_route_0']/div[3]/div[3]/div[2]/ul/li"]//platform
         var tmpArray = [String]()
         for xPath in xPaths {
             let scrapedText = doc?.xPath(xPath)?.first?.content
             let trimmedText = scrapedText?.trimmingCharacters(in: .whitespacesAndNewlines)
             tmpArray.append(trimmedText ?? "")
         }
-        searchResult.append(String((tmpArray[0].prefix(5))))
-        searchResult.append(String((tmpArray[0].suffix(5))))
-        var replacedString = tmpArray[1].replacingOccurrences(of: "分", with: "m")
-        if tmpArray[1].count > 3 {
-            replacedString = replacedString.replacingOccurrences(of: "時間", with: "h")
-        }
-        searchResult.append(replacedString)
-        var terminal: String!
+        searchResult.append(tmpArray[0])
+        searchResult.append(String((tmpArray[1].prefix(5))))
+        searchResult.append(String((tmpArray[1].suffix(5))))
         if tmpArray[2] != "" {
-            terminal = tmpArray[2]
+            searchResult.append(tmpArray[2])
         } else {
-            terminal = tmpArray[3]
+            searchResult.append(tmpArray[3])
+        }
+        var terminal: String!
+        if tmpArray[4] != "" {
+            terminal = tmpArray[4]
+        } else {
+            terminal = tmpArray[5]
         }
         searchResult.append(terminal.components(separatedBy: NSCharacterSet.decimalDigits.inverted).joined().applyingTransform(.fullwidthToHalfwidth, reverse: false)!)
     }
