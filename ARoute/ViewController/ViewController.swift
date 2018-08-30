@@ -9,6 +9,7 @@ final class ViewController: UIViewController {
     @IBOutlet var resetButton: UIButton!
     @IBOutlet var helpButton: UIButton!
     @IBOutlet var frameImageView: UIImageView!
+    @IBOutlet var languageSelect: UISegmentedControl!
     
     var locationManager: CLLocationManager!
     var currentLine: Line!
@@ -55,9 +56,17 @@ fileprivate extension ViewController {
         helpButton.addTarget(self, action: #selector(didtapHelp), for: .touchUpInside)
     }
     
+//    func setupSegmentedControl() {
+//        languageSelect.addTarget(self, action: #selector(didselectLanguage), for: .valueChanged)
+//    }
+    
     @objc func didtapReset() {
         resetTracking()
     }
+    
+//    @objc func didselectLanguage() {
+//        
+//    }
     
     @objc func didtapHelp() {
         showTutorial()
@@ -85,6 +94,7 @@ fileprivate extension ViewController {
             node.removeFromParentNode()
         }
         view.bringSubviewToFront(frameImageView)
+        languageSelect.isEnabled = true
     }
     
     func setupTrackingConfiguration() -> ARWorldTrackingConfiguration {
@@ -136,14 +146,14 @@ fileprivate extension ViewController {
         return UIColor(red: compRed, green: compGreen, blue: compBlue, alpha: 1)
     }
     
-    func putStation(at position: SCNVector3, name: String) {
+    func putStation(at position: SCNVector3, nodeName: String, textString: String) {
         var color = Line.color(currentLine)
-        if name == StationGetter.stationName {
+        if nodeName == StationGetter.stationName {
             color = complementaryColor(baseColor: Line.color(currentLine))
         }
-        putSphere(at: position, color: color, name: name)
+        putSphere(at: position, color: color, name: nodeName)
         let textPosition = SCNVector3(position.x, position.y - 0.01, position.z + 0.02)
-        putText(at: textPosition, name: name)
+        putText(at: textPosition, name: textString)
     }
     
     func putSphere(at pos: SCNVector3, color: UIColor, name: String) {
@@ -174,29 +184,6 @@ fileprivate extension ViewController {
             }
         }
     }
-    
-    func setLine(name: String) {
-        switch name {
-        case "yamanote":
-            currentLine = .yamanote
-        case "soubu":
-            currentLine = .soubu
-        case "tyuuou":
-            currentLine = .tyuuou
-        case "dennenntoshi":
-            currentLine = .dennenntoshi
-        case "touyoko":
-            currentLine = .touyoko
-        case "marunouchi":
-            currentLine = .marunouchi
-        case "ginza":
-            currentLine = .ginza
-        case "touzai":
-            currentLine = .touzai
-        default:
-            currentLine = .yamanote
-        }
-    }
 }
 
 extension ViewController: ARSCNViewDelegate {
@@ -208,17 +195,20 @@ extension ViewController: ARSCNViewDelegate {
         guard let imageAnchor = anchor as? ARImageAnchor else { return }
         guard let imageName = imageAnchor.referenceImage.name else { return }
         print(imageName)
+        var segmentIndex: Int!
         DispatchQueue.main.sync {
             view.sendSubviewToBack(frameImageView)
+            segmentIndex = self.languageSelect.selectedSegmentIndex
+            languageSelect.isEnabled = false
         }
-        setLine(name: imageName)
+        currentLine = Line(rawValue: imageName)
         let baseX = anchor.transform.columns.3.x
         let baseY = anchor.transform.columns.3.y - 0.01
         let baseZ = anchor.transform.columns.3.z - 0.01
         let coordinateData = Line.coordinate(currentLine)
         let stations = Line.stations(currentLine)
-        for i in 0..<stations.count {
-            self.putStation(at: SCNVector3(baseX + coordinateData[i][0] * 3, baseY + coordinateData[i][1] * 3, baseZ), name: stations[i])
+        for i in 0..<stations[0].count {
+            self.putStation(at: SCNVector3(baseX + coordinateData[i][0] * 3, baseY + coordinateData[i][1] * 3, baseZ), nodeName: stations[0][i], textString: stations[segmentIndex][i])
         }
     }
 }

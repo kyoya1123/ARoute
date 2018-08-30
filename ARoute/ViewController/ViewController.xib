@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="frameImageView" destination="YVV-Zv-TZY" id="6YU-c0-uCB"/>
                 <outlet property="helpButton" destination="eDO-xm-5rZ" id="1Ry-M3-sSc"/>
+                <outlet property="languageSelect" destination="5cr-ru-FNG" id="kAZ-3c-YmK"/>
                 <outlet property="resetButton" destination="mmu-FE-yKR" id="xCp-sy-HDv"/>
                 <outlet property="sceneView" destination="FZt-ah-bY2" id="Smj-Nj-Np1"/>
                 <outlet property="view" destination="iN0-l3-epB" id="55l-9i-X3c"/>
@@ -38,12 +39,12 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" image="help"/>
                 </button>
-                <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="frame" translatesAutoresizingMaskIntoConstraints="NO" id="YVV-Zv-TZY">
+                <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="frame" translatesAutoresizingMaskIntoConstraints="NO" id="YVV-Zv-TZY">
                     <rect key="frame" x="37" y="183" width="300" height="300"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5cr-ru-FNG">
-                    <rect key="frame" x="115" y="28" width="145" height="29"/>
+                    <rect key="frame" x="105" y="28" width="164" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <segments>
                         <segment title="Japanese"/>

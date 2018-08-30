@@ -7,13 +7,10 @@ class RouteSearcher {
     
     static func scrape(destination: String) {
         let doc = Ji(htmlURL: RouteSearcher.prepareURL(destination: destination))
-        let xPaths = ["//*[@id='left_pane']/ol[1]/li[1]/dl/dt",//出発到着時刻
-            "//*[@id='detail_route_0']/div[1]/div[2]/dl/dd",//所要時間
+        let xPaths = ["//*[@id='left_pane']/ol[1]/li[1]/dl/dt", //出発到着時刻
+            "//*[@id='detail_route_0']/div[1]/div[2]/dl/dd", //所要時間
             "//*[@id='detail_route_0']/div[3]/div[2]/div[2]/ul/li",
-            "//*[@id='detail_route_0']/div[3]/div[3]/div[2]/ul/li"]//何番線発
-        //////////
-        ////////            //*[@id="detail_route_0"]/div[3]/div[2]/div[2]/dl/dt
-        /////////
+            "//*[@id='detail_route_0']/div[3]/div[3]/div[2]/ul/li"] //何番線発
         var tmpArray = [String]()
         for xPath in xPaths {
             let scrapedText = doc?.xPath(xPath)?.first?.content
