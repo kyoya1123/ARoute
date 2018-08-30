@@ -9,13 +9,15 @@ final class ViewController: UIViewController {
     @IBOutlet var resetButton: UIButton!
     @IBOutlet var helpButton: UIButton!
     @IBOutlet var frameImageView: UIImageView!
-    @IBOutlet var languageSelect: UISegmentedControl!
+    @IBOutlet var languageSegment: UISegmentedControl!
     
     var locationManager: CLLocationManager!
     var currentLine: Line!
+    var deviceLanguage: Language!
     
     override func viewDidLoad() {
         setupLocationManager()
+        setLanguage()
         setupView()
     }
     
@@ -46,8 +48,14 @@ final class ViewController: UIViewController {
 
 fileprivate extension ViewController {
     
+    func setLanguage() {
+        let prefLang = Locale.preferredLanguages.first
+        deviceLanguage = Language(rawValue: String(prefLang!.prefix(2)))!
+    }
+    
     func setupView() {
         setupButtons()
+        setupSegmentControl()
         setupSceneView()
     }
     
@@ -56,17 +64,19 @@ fileprivate extension ViewController {
         helpButton.addTarget(self, action: #selector(didtapHelp), for: .touchUpInside)
     }
     
-//    func setupSegmentedControl() {
-//        languageSelect.addTarget(self, action: #selector(didselectLanguage), for: .valueChanged)
-//    }
+    func setupSegmentControl() {
+        if deviceLanguage == .japanese {
+            languageSegment.removeFromSuperview()
+            return
+        }
+        let titles = Language.segmentTitle(deviceLanguage)
+        languageSegment.setTitle(titles[0], forSegmentAt: 0)
+        languageSegment.setTitle(titles[1], forSegmentAt: 1)
+    }
     
     @objc func didtapReset() {
         resetTracking()
     }
-    
-//    @objc func didselectLanguage() {
-//        
-//    }
     
     @objc func didtapHelp() {
         showTutorial()
@@ -94,7 +104,7 @@ fileprivate extension ViewController {
             node.removeFromParentNode()
         }
         view.bringSubviewToFront(frameImageView)
-        languageSelect.isEnabled = true
+        languageSegment.isEnabled = true
     }
     
     func setupTrackingConfiguration() -> ARWorldTrackingConfiguration {
@@ -198,17 +208,17 @@ extension ViewController: ARSCNViewDelegate {
         var segmentIndex: Int!
         DispatchQueue.main.sync {
             view.sendSubviewToBack(frameImageView)
-            segmentIndex = self.languageSelect.selectedSegmentIndex
-            languageSelect.isEnabled = false
+            segmentIndex = self.languageSegment.selectedSegmentIndex
+            languageSegment.isEnabled = false
         }
         currentLine = Line(rawValue: imageName)
         let baseX = anchor.transform.columns.3.x
         let baseY = anchor.transform.columns.3.y - 0.01
         let baseZ = anchor.transform.columns.3.z - 0.01
         let coordinateData = Line.coordinate(currentLine)
-        let stations = Line.stations(currentLine)
-        for i in 0..<stations[0].count {
-            self.putStation(at: SCNVector3(baseX + coordinateData[i][0] * 3, baseY + coordinateData[i][1] * 3, baseZ), nodeName: stations[0][i], textString: stations[segmentIndex][i])
+        let stationNames = Line.stationNames(currentLine, deviceLanguage)
+        for i in 0..<stationNames[0].count {
+            self.putStation(at: SCNVector3(baseX + coordinateData[i][0] * 3, baseY + coordinateData[i][1] * 3, baseZ), nodeName: stationNames[0][i], textString: stationNames[segmentIndex][i])
         }
     }
 }

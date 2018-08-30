@@ -13,7 +13,7 @@
             <connections>
                 <outlet property="frameImageView" destination="YVV-Zv-TZY" id="6YU-c0-uCB"/>
                 <outlet property="helpButton" destination="eDO-xm-5rZ" id="1Ry-M3-sSc"/>
-                <outlet property="languageSelect" destination="5cr-ru-FNG" id="kAZ-3c-YmK"/>
+                <outlet property="languageSegment" destination="5cr-ru-FNG" id="Axu-TS-nKC"/>
                 <outlet property="resetButton" destination="mmu-FE-yKR" id="xCp-sy-HDv"/>
                 <outlet property="sceneView" destination="FZt-ah-bY2" id="Smj-Nj-Np1"/>
                 <outlet property="view" destination="iN0-l3-epB" id="55l-9i-X3c"/>

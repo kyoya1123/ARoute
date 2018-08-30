@@ -10,6 +10,7 @@
 		9C371E672128F14B0003B58E /* Kano.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9C371E662128F14B0003B58E /* Kano.otf */; };
 		9C371E692129154E0003B58E /* LineEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C371E682129154E0003B58E /* LineEnum.swift */; };
 		9C50F14A21366105002B59EA /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C50F14921366105002B59EA /* PageViewController.swift */; };
+		9C50F14C2137E71A002B59EA /* LanguageEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C50F14B2137E71A002B59EA /* LanguageEnum.swift */; };
 		9C5A8CA62136538C00CAF4C0 /* TutorialViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5A8CA52136538C00CAF4C0 /* TutorialViewControllers.swift */; };
 		9C7A84DF20F08E0E00CEA484 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7A84DE20F08E0E00CEA484 /* AppDelegate.swift */; };
 		9C7A84E120F08E0E00CEA484 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C7A84E020F08E0E00CEA484 /* art.scnassets */; };
@@ -36,6 +37,7 @@
 		9C371E662128F14B0003B58E /* Kano.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Kano.otf; sourceTree = "<group>"; };
 		9C371E682129154E0003B58E /* LineEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineEnum.swift; sourceTree = "<group>"; };
 		9C50F14921366105002B59EA /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		9C50F14B2137E71A002B59EA /* LanguageEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageEnum.swift; sourceTree = "<group>"; };
 		9C5A8C7A2131863F00CAF4C0 /* CoordinateGetter.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = CoordinateGetter.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9C5A8CA52136538C00CAF4C0 /* TutorialViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewControllers.swift; sourceTree = "<group>"; };
 		9C7A84DB20F08E0E00CEA484 /* ARoute.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARoute.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,6 +160,7 @@
 				9C915BDC21250FE10036DE40 /* ResponseStruct.swift */,
 				9CBEC556212D32EE00CE4A70 /* RouteSearcher.swift */,
 				9C371E682129154E0003B58E /* LineEnum.swift */,
+				9C50F14B2137E71A002B59EA /* LanguageEnum.swift */,
 				9CBEC558212D41FC00CE4A70 /* Objects.swift */,
 				9CC6FFA12131726B0005197F /* ForDevelop */,
 			);
@@ -266,6 +269,7 @@
 				9C50F14A21366105002B59EA /* PageViewController.swift in Sources */,
 				9CBEC557212D32EE00CE4A70 /* RouteSearcher.swift in Sources */,
 				9C7A84E320F08E0E00CEA484 /* ViewController.swift in Sources */,
+				9C50F14C2137E71A002B59EA /* LanguageEnum.swift in Sources */,
 				9CEE4EBE2127C722000DB960 /* JiNode.swift in Sources */,
 				9C7A84DF20F08E0E00CEA484 /* AppDelegate.swift in Sources */,
 				9C9E41482128D37200D2500C /* SearchedRouteViewController.swift in Sources */,
