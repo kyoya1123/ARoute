@@ -13,7 +13,7 @@ final class ViewController: UIViewController {
     
     var locationManager: CLLocationManager!
     var currentLine: Line!
-    var deviceLanguage: Language!
+    var deviceLang: Language!
     
     override func viewDidLoad() {
         setupLocationManager()
@@ -50,7 +50,7 @@ fileprivate extension ViewController {
     
     func setLanguage() {
         let prefLang = Locale.preferredLanguages.first
-        deviceLanguage = Language(rawValue: String(prefLang!.prefix(2)))!
+        deviceLang = Language(rawValue: String(prefLang!.prefix(2)))!
     }
     
     func setupView() {
@@ -65,11 +65,11 @@ fileprivate extension ViewController {
     }
     
     func setupSegmentControl() {
-        if deviceLanguage == .japanese {
+        if deviceLang == .japanese {
             languageSegment.removeFromSuperview()
             return
         }
-        let titles = Language.segmentTitle(deviceLanguage)
+        let titles = Language.segmentTitle(deviceLang)
         languageSegment.setTitle(titles[0], forSegmentAt: 0)
         languageSegment.setTitle(titles[1], forSegmentAt: 1)
     }
@@ -216,7 +216,7 @@ extension ViewController: ARSCNViewDelegate {
         let baseY = anchor.transform.columns.3.y - 0.01
         let baseZ = anchor.transform.columns.3.z - 0.01
         let coordinateData = Line.coordinate(currentLine)
-        let stationNames = Line.stationNames(currentLine, deviceLanguage)
+        let stationNames = Line.stationNames(currentLine, deviceLang)
         for i in 0..<stationNames[0].count {
             self.putStation(at: SCNVector3(baseX + coordinateData[i][0] * 3, baseY + coordinateData[i][1] * 3, baseZ), nodeName: stationNames[0][i], textString: stationNames[segmentIndex][i])
         }
