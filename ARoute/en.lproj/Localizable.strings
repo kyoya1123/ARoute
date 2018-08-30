@@ -1,7 +1,22 @@
-/* 
-  Localizable.strings
-  ARoute
+//Tutorial
+"skip" = "skip";
+"page1Title" = "Welcome to ARoute";
+"page1Description" = "Search route with AR";
+"page1Button" = "Take The Tour";
+"page2Title" = "Scan the mark just below the station name";
+"page2Description" = "Route map will appear";
+"page3Title" = "Route Search";
+"page3Description" = "You can know how to get there by touching a station";
+"page4Title" = "Notifications";
+"page4Description" = "I will notify you when you are approaching to the destination";
+"page4Button" = "Get Started";
+"page4Notification" = "Shibuya";
 
-  Created by Kyoya Yamaguchi on 2018/08/30.
-  Copyright © 2018年 Kyoya Yamaguchi. All rights reserved.
-*/
+//SearchedRouteViewController
+"destination" = "Destionation";
+"departure" = "Leaves at";
+"arrival" = "Arrives at";
+"duration" = "Duration";
+"platform" = "Platform";
+"notification" = "Notification";
+"notificationTitle" = "You will arrive soon";

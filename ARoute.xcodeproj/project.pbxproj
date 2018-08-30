@@ -42,6 +42,7 @@
 		9C50F1502138007B002B59EA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9C50F153213800D0002B59EA /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		9C50F154213800DE002B59EA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9C50F15E21380CC3002B59EA /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9C5A8C7A2131863F00CAF4C0 /* CoordinateGetter.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = CoordinateGetter.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9C5A8CA52136538C00CAF4C0 /* TutorialViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewControllers.swift; sourceTree = "<group>"; };
 		9C7A84DB20F08E0E00CEA484 /* ARoute.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARoute.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -239,6 +240,7 @@
 				Base,
 				"zh-Hans",
 				ko,
+				ja,
 			);
 			mainGroup = 9C7A84D220F08E0E00CEA484;
 			productRefGroup = 9C7A84DC20F08E0E00CEA484 /* Products */;
@@ -300,6 +302,7 @@
 				9C50F1502138007B002B59EA /* en */,
 				9C50F153213800D0002B59EA /* zh-Hans */,
 				9C50F154213800DE002B59EA /* ko */,
+				9C50F15E21380CC3002B59EA /* ja */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

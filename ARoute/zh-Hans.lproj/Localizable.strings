@@ -1,7 +1,22 @@
-/* 
-  Localizable.strings
-  ARoute
+//Tutorial
+"skip" = "";
+"page1Title" = "";
+"page1Description" = "";
+"page1Button" = "";
+"page2Title" = "";
+"page2Description" = "Route map will appear";
+"page3Title" = "";
+"page3Description" = "";
+"page4Title" = "";
+"page4Description" = "";
+"page4Button" = "";
+"page4Notification" = "Shibuya";
 
-  Created by Kyoya Yamaguchi on 2018/08/30.
-  Copyright © 2018年 Kyoya Yamaguchi. All rights reserved.
-*/
+//SearchedRouteViewController
+"destination" = "";
+"departure" = "";
+"arrival" = "";
+"duration" = "";
+"platform" = "";
+"notification" = "";
+"notificationTitle" = "まもなく到着します";

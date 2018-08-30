@@ -15,8 +15,8 @@ extension SCNNode {
             material.isDoubleSided = true
         }
         let textNode = SCNNode(geometry: geometry)
-        geometry.font = UIFont.systemFont(ofSize: 0.5)
-        textNode.scale = SCNVector3Make(0.02, 0.02, 0.02)
+        geometry.font = UIFont.systemFont(ofSize: 100)//0.5
+        textNode.scale = SCNVector3Make(0.0001, 0.0001, 0.0001)
         let (min, max) = geometry.boundingBox
         textNode.pivot = SCNMatrix4MakeTranslation((max.x - min.x) / 2, min.y - 0.5, 0)
         let node = SCNNode()

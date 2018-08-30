@@ -1,0 +1,22 @@
+//Tutorial
+"skip" = "スキップ";
+"page1Title" = "ARouteへようこそ";
+"page1Description" = "ARで手軽にルート検索";
+"page1Button" = "ツアーを開始";
+"page2Title" = "駅名の下のマークをスキャン";
+"page2Description" = "路線図が表示されます";
+"page3Title" = "ルート検索";
+"page3Description" = "駅をタップすることでそこまでの行き方を調べることができます";
+"page4Title" = "通知";
+"page4Description" = "目的地に近付くと通知が来ます";
+"page4Button" = "始める";
+"page4Notification" = "渋谷";
+
+//SearchedRouteViewController
+"destination" = "目的地";
+"departure" = "出発時刻";
+"arrival" = "到着時刻";
+"duration" = "所要時間";
+"platform" = "ホーム";
+"notification" = "通知";
+"notificationTitle" = "まもなく到着します";

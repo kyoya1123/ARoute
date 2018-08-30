@@ -31,7 +31,7 @@ final class ViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else {return}
+        guard let touch = touches.first else { return }
         let position = touch.location(in: sceneView)
         tappedScreen(position)
     }

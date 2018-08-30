@@ -100,8 +100,8 @@ fileprivate extension SearchedRouteViewController {
         region.notifyOnExit = false
         trigger = UNLocationNotificationTrigger(region: region, repeats: false)
         let content = UNMutableNotificationContent()
-        content.title = destination
-        content.body = "まもなく到着します"
+        content.title = NSLocalizedString("notificationTitle", comment: "")
+        content.body = destination
         content.sound = UNNotificationSound.default
         let request = UNNotificationRequest(identifier: "destination", content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
