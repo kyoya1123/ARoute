@@ -162,14 +162,15 @@ fileprivate extension ViewController {
     func tappedScreen(_ position: CGPoint) {
         let hitResults = sceneView.hitTest(position, options: [:])
         if hitResults.count != 0 {
-            let nodeName = hitResults[0].node.name
-            print(nodeName ?? "Error")
-            if nodeName != StationGetter.stationName {
-                DestinationGetter.getLocation(destination: nodeName!)
-                let routeView = SearchedRouteViewController()
-                routeView.destination = nodeName
-                routeView.locationManager = locationManager
-                present(routeView, animated: true, completion: nil)
+            if let nodeName = hitResults[0].node.name {
+                print(nodeName)
+                if nodeName != StationGetter.stationName {
+                    DestinationGetter.getLocation(destination: nodeName)
+                    let routeView = SearchedRouteViewController()
+                    routeView.destination = nodeName
+                    routeView.locationManager = locationManager
+                    present(routeView, animated: true, completion: nil)
+                }
             }
         }
     }

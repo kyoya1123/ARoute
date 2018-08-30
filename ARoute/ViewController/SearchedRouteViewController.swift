@@ -66,29 +66,31 @@ fileprivate extension SearchedRouteViewController {
     }
     
     @objc func didSwitched(_ sender: UISwitch) {
-        if sender.isOn {
-            if checkAuthorization() {
-                setupNotification()
-            }
+        switch sender.isOn {
+        case true:
+            checkNotificationAuthorization()
+        case false:
+            deleteNotification()
         }
     }
     
-    func checkAuthorization() -> Bool {
-        var result = false
+    func checkNotificationAuthorization() {
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.getNotificationSettings { (settings) in
-            switch settings.authorizationStatus {
-            case .authorized:
-                result = true
-            case .denied:
-                self.notificationSwitch.setOn(false, animated: true)
-                self.showAlert()
-            case .notDetermined:
-                self.requestAuthorization()
-            default: break
+            notificationCenter.getNotificationSettings { settings in
+                switch settings.authorizationStatus {
+                case .authorized:
+                    self.setupNotification()
+                case .denied:
+                    self.notificationSwitch.setOn(false, animated: true)
+                    self.showAlert()
+                case .notDetermined:
+                    self.requestAuthorization()
+                case .provisional:
+                    break
+                }
             }
         }
-        return result
     }
     
     func setupNotification() {
@@ -101,14 +103,7 @@ fileprivate extension SearchedRouteViewController {
         content.title = destination
         content.body = "まもなく到着します"
         content.sound = UNNotificationSound.default
-        let request = UNNotificationRequest(identifier: "arriving", content: content, trigger: trigger)
-        UNUserNotificationCenter.current().getPendingNotificationRequests { (requests) in
-            for request in requests{
-                if request.content.categoryIdentifier == "destination"{
-                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["destination"])
-                }
-            }
-        }
+        let request = UNNotificationRequest(identifier: "destination", content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
     
@@ -118,6 +113,16 @@ fileprivate extension SearchedRouteViewController {
             if !granted {
                 DispatchQueue.main.async {
                     self.notificationSwitch.setOn(false, animated: true)
+                }
+            }
+        }
+    }
+    
+    func deleteNotification() {
+        UNUserNotificationCenter.current().getPendingNotificationRequests { (requests) in
+            for request in requests{
+                if request.content.categoryIdentifier == "destination"{
+                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["destination"])
                 }
             }
         }
