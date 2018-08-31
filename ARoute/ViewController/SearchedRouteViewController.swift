@@ -15,9 +15,6 @@ final class SearchedRouteViewController: UIViewController {
     
     override func viewDidLoad() {
         setupView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         DispatchQueue.global(qos: .background).async {
             RouteSearcher.scrape(destination: self.destination)
             DispatchQueue.main.async {
@@ -95,13 +92,22 @@ fileprivate extension SearchedRouteViewController {
                     self.setupNotification()
                 case .denied:
                     self.notificationSwitch.setOn(false, animated: true)
-                    self.showAlert()
+                    self.showNotificationAlert()
                 case .notDetermined:
                     self.requestAuthorization()
                 case .provisional:
                     break
                 }
             }
+        }
+    }
+    
+    func checkLocationAuthorization() {
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedAlways:
+            return
+        default:
+            showLocationAlert()
         }
     }
     
@@ -140,8 +146,18 @@ fileprivate extension SearchedRouteViewController {
         }
     }
     
-    func showAlert() {
-        let alert = UIAlertController(title: "通知が許可されていません", message: "設定を変更する", preferredStyle: .alert)
+    func showLocationAlert() {
+        let alert = UIAlertController(title: NSLocalizedString("locatoinUsageTitle", comment: ""), message: NSLocalizedString("locationUsageMessage", comment: ""), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            if let url = URL(string: "\(UIApplication.openSettingsURLString)&path=LOCATION") {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func showNotificationAlert() {
+        let alert = UIAlertController(title: NSLocalizedString("notificationAlertTitle", comment: ""), message: NSLocalizedString("alertMessage", comment: ""), preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             if let url = URL(string: "\(UIApplication.openSettingsURLString)&path=NOTIFICATION") {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)

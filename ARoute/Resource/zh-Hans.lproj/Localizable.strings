@@ -20,3 +20,11 @@
 "platform" = "";
 "notification" = "";
 "notificationTitle" = "まもなく到着します";
+
+//Alert
+"locationAlertTitle" = "Using location isn't Allowed";
+"notificationAlertTitle" = "Sending notifications isn't allowed";
+"alertMessage" = "Change settings";
+"locationUsageTitle" = "Always location use isn't allowed";
+"locationUsageMessage" = "You need to change settings to get notifications";
+

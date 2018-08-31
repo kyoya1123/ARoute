@@ -84,13 +84,13 @@ enum Line: String {
                 ["Shinagawa", "Ōsaki", "Gotanda", "Meguro", "Ebisu", "Shibuya", "Harajuku", "Yoyogi", "Shinjuku", "Shin-Ōkubo", "Takadanobaba", "Mejiro", "Ikebukuro", "Ōtsuka", "Sugamo", "Komagome", "Tabata", "Nishi-Nippori", "Nippori", "Uguisudani", "Ueno", "Okachimachi", "Akihabara", "Kanda", "Tokyo", "Yūrakuchō", "Shimbashi", "Hamamatsuchō", "Tamachi"]
         case .soubu:
             return
-                []
+                ["Mitaka", "Kichijōji", "Nishi-Ogikubo", "Ogikubo", "Asagaya", "Kōenji", "Nakano", "Higashi-Nakano", "Ōkubo", "Shinjuku", "Yoyogi", "Sendagaya", "Shinanomachi", "Yotsuya", "Ichigaya", "Iidabashi", "Suidōbashi", "Ochanomizu", "Akihabara", "Asakusabashi", "Ryōgoku", "Kinshichō", "Kameido", "Hirai", "Shin-Koiwa", "Koiwa", "Ichikawa", "Moto-Yawata", "Shimōsa-Nakayama", "Nishi-Funabashi", "Funabashi", "Higashi-Funabashi", "Tsudanuma", "Makuharihongō", "Makuhari", "Shin-Kemigawa", "Inage", "Nishi-Chiba", "Chiba"]
         case .tyuuou:
             return
                 []
         case .dennenntoshi:
             return
-                []
+                ["Shibuya", "Ikejiri-Ōhashi", "Sangen-Jaya", "Komazawa-Daigaku", "Sakura-shimmachi", "Yōga", "Futako-Tamagawa", "Futako-Shinchi", "Takatsu", "Mizonokuchi", "Kajigaya", "Miyazakidai", "Miyamaedaira", "Saginuma", "Tama-Plaza", "Azamino", "Eda", "Ichigao", "Fujigaoka", "Aobadai", "Tana", "Nagatsuta", "Tsukushino", "Suzukakedai", "Minami-Machida", "Tsukimino", "Chūō-Rinkan"]
         case .touyoko:
             return
                 []
@@ -99,7 +99,7 @@ enum Line: String {
                 []
         case .ginza:
             return
-                []
+                ["Shibuya", "Omote-sando", "Gaiemmae", "Aoyama-itchome", "Akasaka-mitsuke", "Tameike-sanno", "Toranomon", "Shimbashi", "Ginza", "Kyobashi", "Nihombashi", "Mitsukoshimae", "Kanda", "Suehirocho", "Ueno-hirokoji", "Ueno", "Inaricho", "Tawaramachi", "Asakusa"]
         case .touzai:
             return
                 []
@@ -193,3 +193,4 @@ enum Line: String {
         }
     }
 }
+

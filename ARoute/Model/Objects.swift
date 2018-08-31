@@ -15,7 +15,7 @@ extension SCNNode {
             material.isDoubleSided = true
         }
         let textNode = SCNNode(geometry: geometry)
-        geometry.font = UIFont.systemFont(ofSize: 100)//0.5
+        geometry.font = UIFont(name: "Kano-regular", size: 100)
         textNode.scale = SCNVector3Make(0.0001, 0.0001, 0.0001)
         let (min, max) = geometry.boundingBox
         textNode.pivot = SCNMatrix4MakeTranslation((max.x - min.x) / 2, min.y - 0.5, 0)

@@ -72,6 +72,7 @@ fileprivate extension ViewController {
         let titles = Language.segmentTitle(deviceLang)
         languageSegment.setTitle(titles[0], forSegmentAt: 0)
         languageSegment.setTitle(titles[1], forSegmentAt: 1)
+        languageSegment.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Kano-regular", size: 15) ?? UIFont()], for: .normal)
     }
     
     @objc func didtapReset() {
@@ -139,7 +140,7 @@ fileprivate extension ViewController {
     }
     
     func showLocationAlert() {
-        let alert = UIAlertController(title: "位置情報の使用が許可されていません", message: "設定を変更する", preferredStyle: .alert)
+        let alert = UIAlertController(title: NSLocalizedString("locationAlertTitle", comment: ""), message: NSLocalizedString("alertMessage", comment: ""), preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             if let url = URL(string: "\(UIApplication.openSettingsURLString)&path=LOCATION") {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -162,7 +163,7 @@ fileprivate extension ViewController {
             color = complementaryColor(baseColor: Line.color(currentLine))
         }
         putSphere(at: position, color: color, name: nodeName)
-        let textPosition = SCNVector3(position.x, position.y - 0.01, position.z + 0.02)
+        let textPosition = SCNVector3(position.x, position.y, position.z + 0.02)
         putText(at: textPosition, name: textString)
     }
     

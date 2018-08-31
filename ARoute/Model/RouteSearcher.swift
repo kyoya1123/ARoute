@@ -6,6 +6,7 @@ class RouteSearcher {
     static var searchResult = [String]()
     
     static func scrape(destination: String) {
+        searchResult.removeAll()
         let doc = Ji(htmlURL: RouteSearcher.prepareURL(destination: destination))
         let xPaths = ["//*[@id='left_pane']/h1/strong[2]",//destination
             "//*[@id='left_pane']/ol[1]/li[1]/dl/dt", //time

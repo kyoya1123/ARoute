@@ -13,10 +13,17 @@
 "page4Notification" = "Shibuya";
 
 //SearchedRouteViewController
-"destination" = "Destionation";
+"destination" = "Destination";
 "departure" = "Leaves at";
 "arrival" = "Arrives at";
 "duration" = "Duration";
 "platform" = "Platform";
 "notification" = "Notification";
 "notificationTitle" = "You will arrive soon";
+
+//Alert
+"locationAlertTitle" = "Using location isn't Allowed";
+"notificationAlertTitle" = "Sending notifications isn't allowed";
+"alertMessage" = "Change settings";
+"locationUsageTitle" = "Always location use isn't allowed";
+"locationUsageMessage" = "You need to change settings to get notifications";

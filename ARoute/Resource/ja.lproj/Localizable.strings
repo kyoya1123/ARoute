@@ -20,3 +20,10 @@
 "platform" = "ホーム";
 "notification" = "通知";
 "notificationTitle" = "まもなく到着します";
+
+//Alert
+"locationAlertTitle" = "位置情報の使用が許可されていません";
+"notificationAlertTitle" = "通知が許可されていません";
+"alertMessage" = "設定を変更する";
+"locationUsageTitle" = "位置情報が常に許可されていません";
+"locationUsageMessage" = "通知機能を使用するには設定を変更して下さい";

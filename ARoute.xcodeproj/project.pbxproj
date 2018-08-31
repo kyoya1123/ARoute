@@ -118,7 +118,6 @@
 				9C9E41432128CBDC00D2500C /* Model */,
 				9C9E41422128CBCC00D2500C /* Resource */,
 				9C7A84EC20F08E1000CEA484 /* Info.plist */,
-				9C50F1512138007B002B59EA /* Localizable.strings */,
 				9C7A84E920F08E1000CEA484 /* LaunchScreen.storyboard */,
 			);
 			path = ARoute;
@@ -151,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				9C371E662128F14B0003B58E /* Kano.otf */,
+				9C50F1512138007B002B59EA /* Localizable.strings */,
 				9C7A84E020F08E0E00CEA484 /* art.scnassets */,
 				9C7A84E720F08E1000CEA484 /* Assets.xcassets */,
 			);
