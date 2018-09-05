@@ -1,30 +1,30 @@
 //Tutorial
-"skip" = "";
-"page1Title" = "";
-"page1Description" = "";
-"page1Button" = "";
-"page2Title" = "";
-"page2Description" = "";
-"page3Title" = "";
-"page3Description" = "";
-"page4Title" = "";
-"page4Description" = "";
-"page4Button" = "";
-"page4Notification" = "";
+"skip" = "건너 뛰기";
+"page1Title" = "ARoute에 오신 것을 환영합니다";
+"page1Description" = "AR에서 손쉽게 루트 검색";
+"page1Button" = "투어 시작";
+"page2Title" = "역명 아래의 마크를 스캔";
+"page2Description" = "노선도가 표시됩니다";
+"page3Title" = "루트 검색";
+"page3Description" = "역을 탭하여 거기까지가는 방법을 확인할 수 있습니다";
+"page4Title" = "통지";
+"page4Description" = "목적지에 가까워지면 통지가옵니다";
+"page4Button" = "시작";
+"page4Notification" = "시부야";
 
 //SearchedRouteViewController
-"destination" = "";
-"departure" = "";
-"arrival" = "";
-"duration" = "";
-"platform" = "";
-"notification" = "";
-"notificationTitle" = "";
+"destination" = "목적지";
+"departure" = "출발 시간";
+"arrival" = "도착 시간";
+"duration" = "소요 시간";
+"platform" = "승강장";
+"notification" = "통지";
+"notificationTitle" = "곧 도착합니다";
 
 //Alert
-"locationAlertTitle" = "";
-"notificationAlertTitle" = "";
-"alertMessage" = "";
-"locationUsageTitle" = "";
-"locationUsageMessage" = "";
+"locationAlertTitle" = "위치 정보 사용을 허용하지 않습니다";
+"notificationAlertTitle" = "알림이 허용되지 않습니다";
+"alertMessage" = "설정을 변경";
+"locationUsageTitle" = "위치 정보가 항상 허용되지 않습니다";
+"locationUsageMessage" = "알림 기능을 사용하기 위해 설정을 변경하기";
 
