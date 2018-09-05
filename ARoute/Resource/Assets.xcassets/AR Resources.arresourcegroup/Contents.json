@@ -5,28 +5,28 @@
   },
   "resources" : [
     {
-      "filename" : "dennenntoshi.arreferenceimage"
+      "filename" : "DT.arreferenceimage"
     },
     {
-      "filename" : "ginza.arreferenceimage"
+      "filename" : "G.arreferenceimage"
     },
     {
-      "filename" : "marunouchi.arreferenceimage"
+      "filename" : "JB.arreferenceimage"
     },
     {
-      "filename" : "soubu.arreferenceimage"
+      "filename" : "JC.arreferenceimage"
     },
     {
-      "filename" : "touyoko.arreferenceimage"
+      "filename" : "JY.arreferenceimage"
     },
     {
-      "filename" : "touzai.arreferenceimage"
+      "filename" : "M.arreferenceimage"
     },
     {
-      "filename" : "tyuuou.arreferenceimage"
+      "filename" : "T.arreferenceimage"
     },
     {
-      "filename" : "yamanote.arreferenceimage"
+      "filename" : "TY.arreferenceimage"
     }
   ]
 }

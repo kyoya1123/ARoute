@@ -50,7 +50,11 @@ fileprivate extension ViewController {
     
     func setLanguage() {
         let prefLang = Locale.preferredLanguages.first
-        deviceLang = Language(rawValue: String(prefLang!.prefix(2)))!
+        if let language = Language(rawValue: String(prefLang!.prefix(2))) {
+            deviceLang = language
+        } else {
+            deviceLang = .english
+        }
     }
     
     func setupView() {
@@ -189,7 +193,6 @@ fileprivate extension ViewController {
                     DestinationGetter.getLocation(destination: nodeName)
                     let routeView = SearchedRouteViewController()
                     routeView.destination = nodeName
-                    routeView.locationManager = locationManager
                     present(routeView, animated: true, completion: nil)
                 }
             }
@@ -211,6 +214,9 @@ extension ViewController: ARSCNViewDelegate {
             view.sendSubviewToBack(frameImageView)
             segmentIndex = self.languageSegment.selectedSegmentIndex
             languageSegment.isEnabled = false
+            let generator = UINotificationFeedbackGenerator()
+            generator.prepare()
+            generator.notificationOccurred(.success)
         }
         currentLine = Line(rawValue: imageName)
         let baseX = anchor.transform.columns.3.x

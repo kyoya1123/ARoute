@@ -11,7 +11,7 @@ enum Language: String {
         case .english:
             return ["Japanese", "English"]
         case .chinese:
-            return ["日语", "中文"]
+            return ["日本语", "中国语"]
         case .korean:
             return ["일본어", "한국어"]
         case .japanese:

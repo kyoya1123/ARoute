@@ -11,10 +11,12 @@ final class SearchedRouteViewController: UIViewController {
     @IBOutlet var notificationSwitch: UISwitch!
     
     var destination: String!
-    var locationManager: CLLocationManager!
+    let locationManager = CLLocationManager()
+    var region = CLCircularRegion()
     
     override func viewDidLoad() {
         setupView()
+        setupLocationManager()
         DispatchQueue.global(qos: .background).async {
             RouteSearcher.scrape(destination: self.destination)
             DispatchQueue.main.async {
@@ -30,6 +32,12 @@ fileprivate extension SearchedRouteViewController {
         setupDescriptions()
         setupButton()
         setupSwitch()
+    }
+    
+    func setupLocationManager() {
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.distanceFilter = 100
+        locationManager.allowsBackgroundLocationUpdates = true
     }
     
     func updateLabels() {
@@ -79,7 +87,7 @@ fileprivate extension SearchedRouteViewController {
         case true:
             checkNotificationAuthorization()
         case false:
-            deleteNotification()
+            locationManager.stopMonitoring(for: region)
         }
     }
     
@@ -89,7 +97,8 @@ fileprivate extension SearchedRouteViewController {
             notificationCenter.getNotificationSettings { settings in
                 switch settings.authorizationStatus {
                 case .authorized:
-                    self.setupNotification()
+                    self.checkLocationAuthorization()
+                    self.setupRegion()
                 case .denied:
                     self.notificationSwitch.setOn(false, animated: true)
                     self.showNotificationAlert()
@@ -111,18 +120,11 @@ fileprivate extension SearchedRouteViewController {
         }
     }
     
-    func setupNotification() {
-        let trigger: UNNotificationTrigger
-        let  region = CLCircularRegion(center: DestinationGetter.coordinate, radius: 500, identifier: "destination")
-        region.notifyOnEntry = true
+    func setupRegion() {
+        print(locationManager.desiredAccuracy)
+        region = CLCircularRegion(center: DestinationGetter.coordinate, radius: 500, identifier: "destination")
         region.notifyOnExit = false
-        trigger = UNLocationNotificationTrigger(region: region, repeats: false)
-        let content = UNMutableNotificationContent()
-        content.title = NSLocalizedString("notificationTitle", comment: "")
-        content.body = RouteSearcher.searchResult[0]
-        content.sound = UNNotificationSound.default
-        let request = UNNotificationRequest(identifier: "destination", content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        locationManager.startMonitoring(for: region)
     }
     
     func requestAuthorization() {
@@ -136,18 +138,9 @@ fileprivate extension SearchedRouteViewController {
         }
     }
     
-    func deleteNotification() {
-        UNUserNotificationCenter.current().getPendingNotificationRequests { (requests) in
-            for request in requests{
-                if request.content.categoryIdentifier == "destination"{
-                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["destination"])
-                }
-            }
-        }
-    }
-    
     func showLocationAlert() {
-        let alert = UIAlertController(title: NSLocalizedString("locatoinUsageTitle", comment: ""), message: NSLocalizedString("locationUsageMessage", comment: ""), preferredStyle: .alert)
+        notificationSwitch.setOn(false, animated: true)
+        let alert = UIAlertController(title: NSLocalizedString("locationUsageTitle", comment: ""), message: NSLocalizedString("locationUsageMessage", comment: ""), preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             if let url = URL(string: "\(UIApplication.openSettingsURLString)&path=LOCATION") {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -168,6 +161,7 @@ fileprivate extension SearchedRouteViewController {
 }
 
 extension SearchedRouteViewController: UNUserNotificationCenterDelegate {
+    
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler(UNNotificationPresentationOptions.sound)
     }

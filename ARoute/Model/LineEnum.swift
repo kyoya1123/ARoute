@@ -1,14 +1,14 @@
 import UIKit
 
 enum Line: String {
-    case yamanote = "yamanote"
-    case soubu = "soubu"
-    case tyuuou = "tyuuou"
-    case dennenntoshi = "dennenntoshi"
-    case touyoko = "touyoko"
-    case marunouchi = "marunouchi"
-    case ginza = "ginza"
-    case touzai = "touzai"
+    case yamanote = "JY"
+    case soubu = "JB"
+    case tyuuou = "JC"
+    case dennenntoshi = "DT"
+    case touyoko = "TY"
+    case marunouchi = "M"
+    case ginza = "G"
+    case touzai = "T"
     
     static func color(_ line: Line) -> UIColor {
         switch line {
@@ -87,22 +87,22 @@ enum Line: String {
                 ["Mitaka", "Kichijōji", "Nishi-Ogikubo", "Ogikubo", "Asagaya", "Kōenji", "Nakano", "Higashi-Nakano", "Ōkubo", "Shinjuku", "Yoyogi", "Sendagaya", "Shinanomachi", "Yotsuya", "Ichigaya", "Iidabashi", "Suidōbashi", "Ochanomizu", "Akihabara", "Asakusabashi", "Ryōgoku", "Kinshichō", "Kameido", "Hirai", "Shin-Koiwa", "Koiwa", "Ichikawa", "Moto-Yawata", "Shimōsa-Nakayama", "Nishi-Funabashi", "Funabashi", "Higashi-Funabashi", "Tsudanuma", "Makuharihongō", "Makuhari", "Shin-Kemigawa", "Inage", "Nishi-Chiba", "Chiba"]
         case .tyuuou:
             return
-                []
+                ["Tokyo", "Kanda", "Ochanomizu", "Suidōbashi", "Iidabashi", "Ichigaya", "Yotsuya", "Shinanomachi", "Sendagaya", "Yoyogi", "Shinjuku", "Ōkubo", "Higashi-Nakano", "Nakano", "Kōenji", "Asagaya", "Ogikubo", "Nishi-Ogikubo", "Kichijōji", "Mitaka", "Musashi-Sakai", "Higashi-Koganei", "Musashi-Koganei", "Kokubunji", "Nishi-Kokubunji", "Kunitachi", "Tachikawa", "Hino", "Toyoda", "Hachiōji", "Nishi-Hachiōji", "Takao"]
         case .dennenntoshi:
             return
                 ["Shibuya", "Ikejiri-Ōhashi", "Sangen-Jaya", "Komazawa-Daigaku", "Sakura-shimmachi", "Yōga", "Futako-Tamagawa", "Futako-Shinchi", "Takatsu", "Mizonokuchi", "Kajigaya", "Miyazakidai", "Miyamaedaira", "Saginuma", "Tama-Plaza", "Azamino", "Eda", "Ichigao", "Fujigaoka", "Aobadai", "Tana", "Nagatsuta", "Tsukushino", "Suzukakedai", "Minami-Machida", "Tsukimino", "Chūō-Rinkan"]
         case .touyoko:
             return
-                []
+                ["Shibuya", "Daikan-yama", "Naka-Meguro", "Yūtenji", "Gakugeidaigaku", "Toritsudaigaku", "Jiyūgaoka", "Den-en-chōfu", "Tamagawa", "Shin-Maruko", "Musashi-Kosugi", "Motosumiyoshi", "Hiyoshi", "Tsunashima", "Ōkurayama", "Kikuna", "Myōrenji", "Hakuraku", "Higashi-Hakuraku", "Tammachi", "Yokohama"]
         case .marunouchi:
             return
-                []
+                ["Ikebukuro", "Shin-otsuka", "Myogadani", "Korakuen", "Hongo-sanchome", "Ochanomizu", "Awajicho", "Otemachi", "Tokyo", "Ginza", "Kasumigaseki", "Kokkai-gijidomae", "Akasaka-mitsuke", "Yotsuya", "Yotsuya-sanchome", "Shinjuku-gyoemmae", "Shinjuku-sanchome", "Shinjuku", "Nishi-shinjuku", "Nakano-sakaue", "Shin-nakano", "Higashi-koenji", "Shin-koenji", "Minami-asagaya", "Ogikubo", "Nakano-shimbashi", "Nakano-fujimicho", "Honancho"]
         case .ginza:
             return
                 ["Shibuya", "Omote-sando", "Gaiemmae", "Aoyama-itchome", "Akasaka-mitsuke", "Tameike-sanno", "Toranomon", "Shimbashi", "Ginza", "Kyobashi", "Nihombashi", "Mitsukoshimae", "Kanda", "Suehirocho", "Ueno-hirokoji", "Ueno", "Inaricho", "Tawaramachi", "Asakusa"]
         case .touzai:
             return
-                []
+                ["Nakano", "Ochiai", "Takadanobaba", "Waseda", "Kagurazaka", "Iidabashi", "Kudanshita", "Takebashi", "Ōtemachi", "Nihombashi", "Kayabachō", "Monzen-Nakachō", "Kiba", "Tōyōchō", "Minami-Sunamachi", "Nishi-Kasai", "Kasai", "Urayasu", "Minami-Gyōtoku", "Gyōtoku", "Myōden", "Baraki-Nakayama", "Nishi-Funabashi"]
         }
     }
     
@@ -110,28 +110,28 @@ enum Line: String {
         switch line {
         case .yamanote:
             return
-                []
+                ["品川", "大崎", "五反田", "目黑", "惠比壽", "澀谷", "原宿", "代代木", "新宿", "新大久保", "高田馬場", "目白", "池袋", "大塚", "巢鴨", "駒込", "田端", "西日暮里", "日暮里", "鶯谷", "上野", "御徒町", "秋葉原", "神田", "東京", "有樂町", "新橋", "濱松町", "田町"]
         case .soubu:
             return
-                []
+                ["三鷹", "吉祥寺", "西荻窪", "荻窪", "阿佐谷", "高圓寺", "中野", "東中野", "大久保", "新宿", "代代木", "千駄谷", "信濃町", "四谷", "市谷", "飯田橋", "水道橋", "御茶之水", "秋葉原", "淺草橋", "兩國", "錦糸町", "龜戶", "平井", "新小岩", "小岩", "市川", "本八幡", "下總中山", "西船橋", "船橋", "東船橋", "津田沼", "幕張本鄉", "幕張", "新檢見川", "稻毛", "西千葉", "千葉"]
         case .tyuuou:
             return
-                []
+                ["東京", "神田", "御荼之水", "水道橋", "飯田橋", "市谷", "四谷", "信濃町", "千駄谷", "代代木", "新宿", "大久保", "東中野", "中野", "高圓寺", "阿佐谷", "荻窪", "西荻窪", "吉祥寺", "三鷹", "武藏境", "東小金井", "武藏小金井", "國分寺", "西國分寺", "國立", "立川", "日野", "豐田", "八王子", "西八王子", "高尾"]
         case .dennenntoshi:
             return
-                []
+                ["澀谷", "池尻大橋", "三軒茶屋", "駒澤大學", "櫻新町", "用賀", "二子玉川", "二子新地", "高津", "溝之口", "梶谷", "宮崎台", "宮前平", "鷺沼", "多摩廣場", "薊野", "江田", "市尾", "藤丘", "青葉台", "田奈", "長津田", "土筆野", "鈴懸台", "南町田", "月見野", "中央林間"]
         case .touyoko:
             return
-                []
+                ["澀谷", "代官山", "中目黑", "祐天寺", "學藝大學", "都立大學", "自由丘", "田園調布", "多摩川", "新丸子", "武藏小杉", "元住吉", "日吉", "綱島", "大倉山", "菊名", "妙蓮寺", "白樂", "東白樂", "反町", "橫濱"]
         case .marunouchi:
             return
-                []
+                ["池袋", "新大塚", "茗荷谷", "後樂園", "本鄉三丁目", "御茶之水", "淡路町", "大手町", "東京", "銀座", "霞關", "國會議事堂前", "赤坂見附", "四谷", "四谷三丁目", "新宿御苑前", "新宿三丁目", "新宿", "西新宿", "中野坂上", "新中野", "東高圓寺", "新高圓寺", "南阿佐谷", "荻窪", "方南町", "中野富士見町", "中野新橋"]
         case .ginza:
             return
-                []
+                ["澀谷", "表參道", "外苑前", "青山一丁目", "赤坂見附", "溜池山王", "虎之門", "新橋", "銀座", "京橋", "日本橋", "三越前", "神田", "末廣町", "上野廣小路", "上野", "稻荷町", "田原町", "淺草"]
         case .touzai:
             return
-                []
+                ["中野", "落合", "高田馬場", "早稻田", "神樂坂", "飯田橋", "九段下", "竹橋", "大手町", "日本橋", "茅場町", "門前仲町", "木場", "東陽町", "南砂町", "西葛西", "葛西", "浦安", "南行德", "行德", "妙典", "原木中山", "西船橋"]
         }
     }
     
@@ -139,7 +139,7 @@ enum Line: String {
         switch line {
         case .yamanote:
             return
-                []
+                ["시나가와", "오사키", "고탄다", "메구로", "에비스", "시부야", "하라주쿠", "요요기", "신주쿠", "신오쿠보", "다카다노바바", "메지로", "이케부쿠로", "오쓰카", "스가모", "고마고메", "다바타", "니시닛포리", "닛포리", "우구이스다니", "우에노", "오카치마치", "아키하바라", "간다", "도쿄", "유라쿠초", "신바시", "하마마쓰초", "다마치"]
         case .soubu:
             return
                 []
@@ -193,4 +193,3 @@ enum Line: String {
         }
     }
 }
-

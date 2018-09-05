@@ -4,13 +4,13 @@
 "page1Description" = "";
 "page1Button" = "";
 "page2Title" = "";
-"page2Description" = "Route map will appear";
+"page2Description" = "";
 "page3Title" = "";
 "page3Description" = "";
 "page4Title" = "";
 "page4Description" = "";
 "page4Button" = "";
-"page4Notification" = "Shibuya";
+"page4Notification" = "";
 
 //SearchedRouteViewController
 "destination" = "";
@@ -19,12 +19,12 @@
 "duration" = "";
 "platform" = "";
 "notification" = "";
-"notificationTitle" = "まもなく到着します";
+"notificationTitle" = "";
 
 //Alert
-"locationAlertTitle" = "Using location isn't Allowed";
-"notificationAlertTitle" = "Sending notifications isn't allowed";
-"alertMessage" = "Change settings";
-"locationUsageTitle" = "Always location use isn't allowed";
-"locationUsageMessage" = "You need to change settings to get notifications";
+"locationAlertTitle" = "";
+"notificationAlertTitle" = "";
+"alertMessage" = "";
+"locationUsageTitle" = "";
+"locationUsageMessage" = "";
 

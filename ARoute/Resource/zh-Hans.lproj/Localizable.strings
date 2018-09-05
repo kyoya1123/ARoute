@@ -1,30 +1,30 @@
 //Tutorial
-"skip" = "";
-"page1Title" = "";
-"page1Description" = "";
-"page1Button" = "";
-"page2Title" = "";
-"page2Description" = "Route map will appear";
-"page3Title" = "";
-"page3Description" = "";
-"page4Title" = "";
-"page4Description" = "";
-"page4Button" = "";
-"page4Notification" = "Shibuya";
+"skip" = "跳过";
+"page1Title" = "欢迎来到 ARoute ";
+"page1Description" = "AR 轻便查线路";
+"page1Button" = "开始";
+"page2Title" = "扫描车站名下的记号";
+"page2Description" = "要显示线路图";
+"page3Title" = "路线搜索";
+"page3Description" = "当您按车站，你可以查找到那条路";
+"page4Title" = "通知";
+"page4Description" = "当您靠近目的地时会收到通知";
+"page4Button" = "开始";
+"page4Notification" = "涩谷";
 
 //SearchedRouteViewController
-"destination" = "";
-"departure" = "";
-"arrival" = "";
-"duration" = "";
-"platform" = "";
-"notification" = "";
-"notificationTitle" = "まもなく到着します";
+"destination" = "目的地";
+"departure" = "出发时间";
+"arrival" = "到达时间";
+"duration" = "需要时间";
+"platform" = "站台";
+"notification" = "通知";
+"notificationTitle" = "不久到达";
 
 //Alert
-"locationAlertTitle" = "Using location isn't Allowed";
-"notificationAlertTitle" = "Sending notifications isn't allowed";
-"alertMessage" = "Change settings";
-"locationUsageTitle" = "Always location use isn't allowed";
-"locationUsageMessage" = "You need to change settings to get notifications";
+"locationAlertTitle" = "不允许使用位置信息";
+"notificationAlertTitle" = "不允许通知功能";
+"alertMessage" = "变更设置";
+"locationUsageTitle" = "不总是认可位置信息";
+"locationUsageMessage" = "请变更设定使用通知功能";
 

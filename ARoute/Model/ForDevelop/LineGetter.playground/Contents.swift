@@ -1,4 +1,4 @@
-import UIKit
+import Foundation
 
 func getLineData(line: String) {
     let urlString = "http://express.heartrails.com/api/json?method=getStations&line=\(line)"
@@ -30,4 +30,5 @@ struct StationData: Codable {
 }
 
 let lineNames = ["JR山手線", "JR総武線", "JR中央線", "東急田園都市線", "東急東横線", "東京メトロ丸ノ内線","東京メトロ丸ノ内分岐線", "東京メトロ銀座線", "東京メトロ東西線"]
-getLineData(line: lineNames[8])
+getLineData(line: lineNames[2])
+
