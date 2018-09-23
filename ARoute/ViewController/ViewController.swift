@@ -73,7 +73,7 @@ fileprivate extension ViewController {
             languageSegment.removeFromSuperview()
             return
         }
-        let titles = Language.segmentTitle(deviceLang)
+        let titles = deviceLang.segmentTitle
         languageSegment.setTitle(titles[0], forSegmentAt: 0)
         languageSegment.setTitle(titles[1], forSegmentAt: 1)
         languageSegment.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Kano-regular", size: 15) ?? UIFont()], for: .normal)
@@ -162,9 +162,9 @@ fileprivate extension ViewController {
     }
     
     func putStation(at position: SCNVector3, nodeName: String, textString: String) {
-        var color = Line.color(currentLine)
+        var color = currentLine.color
         if nodeName == StationGetter.stationName {
-            color = complementaryColor(baseColor: Line.color(currentLine))
+            color = complementaryColor(baseColor: color)
         }
         putSphere(at: position, color: color, name: nodeName)
         let textPosition = SCNVector3(position.x, position.y, position.z + 0.02)
@@ -219,7 +219,7 @@ extension ViewController: ARSCNViewDelegate {
         let baseX = anchor.transform.columns.3.x
         let baseY = anchor.transform.columns.3.y - 0.01
         let baseZ = anchor.transform.columns.3.z - 0.01
-        let coordinateData = Line.coordinate(currentLine)
+        let coordinateData = currentLine.coordinate
         let stationNames = Line.stationNames(currentLine, deviceLang)
         for i in 0..<stationNames[0].count {
             self.putStation(at: SCNVector3(baseX + coordinateData[i][0] * 3, baseY + coordinateData[i][1] * 3, baseZ), nodeName: stationNames[0][i], textString: stationNames[segmentIndex][i])

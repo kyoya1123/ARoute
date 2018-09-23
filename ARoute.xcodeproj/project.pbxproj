@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9C371E672128F14B0003B58E /* Kano.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9C371E662128F14B0003B58E /* Kano.otf */; };
 		9C371E692129154E0003B58E /* LineEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C371E682129154E0003B58E /* LineEnum.swift */; };
+		9C46AD202157D1B3001E3FB1 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C46AD1F2157D1B3001E3FB1 /* SwiftyJSON.swift */; };
 		9C4D7BB52155267B000DFDDF /* RouteSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4D7BB42155267B000DFDDF /* RouteSearcher.swift */; };
 		9C50F14A21366105002B59EA /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C50F14921366105002B59EA /* PageViewController.swift */; };
 		9C50F14C2137E71A002B59EA /* LanguageEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C50F14B2137E71A002B59EA /* LanguageEnum.swift */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		9C371E662128F14B0003B58E /* Kano.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Kano.otf; sourceTree = "<group>"; };
 		9C371E682129154E0003B58E /* LineEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineEnum.swift; sourceTree = "<group>"; };
+		9C46AD1F2157D1B3001E3FB1 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		9C4D7BB42155267B000DFDDF /* RouteSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteSearcher.swift; sourceTree = "<group>"; };
 		9C50F14921366105002B59EA /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		9C50F14B2137E71A002B59EA /* LanguageEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageEnum.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				9C371E682129154E0003B58E /* LineEnum.swift */,
 				9C50F14B2137E71A002B59EA /* LanguageEnum.swift */,
 				9CBEC558212D41FC00CE4A70 /* Objects.swift */,
+				9C46AD1F2157D1B3001E3FB1 /* SwiftyJSON.swift */,
 				9CC6FFA12131726B0005197F /* ForDevelop */,
 			);
 			path = Model;
@@ -286,6 +289,7 @@
 				9C5A8CA62136538C00CAF4C0 /* TutorialViewControllers.swift in Sources */,
 				9CEE4EBD2127C722000DB960 /* Ji.swift in Sources */,
 				9CC6FF9E212FCD590005197F /* DestinationGetter.swift in Sources */,
+				9C46AD202157D1B3001E3FB1 /* SwiftyJSON.swift in Sources */,
 				9C915BDB21250F210036DE40 /* StationGetter.swift in Sources */,
 				9CEE4EBC2127C722000DB960 /* JiHelper.swift in Sources */,
 				9C371E692129154E0003B58E /* LineEnum.swift in Sources */,
@@ -446,6 +450,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3X7LEN654Y;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = ARoute/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -468,6 +473,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3X7LEN654Y;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = ARoute/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

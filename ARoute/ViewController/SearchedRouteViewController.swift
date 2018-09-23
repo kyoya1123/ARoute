@@ -41,7 +41,7 @@ fileprivate extension SearchedRouteViewController {
     }
     
     func updateLabels() {
-        resultLabels[0].text = RouteSearcher.searchResult["destination"]
+        resultLabels[0].text = destination
         resultLabels[1].text = RouteSearcher.searchResult["departure"]
         resultLabels[2].text = RouteSearcher.searchResult["arrival"]
         resultLabels[3].text = RouteSearcher.searchResult["duration"]

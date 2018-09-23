@@ -6,8 +6,8 @@ enum Language: String {
     case korean = "ko"
     case japanese = "ja"
     
-    static func segmentTitle(_ language: Language) -> [String] {
-        switch language {
+    var segmentTitle: [String] {
+        switch self {
         case .english:
             return ["Japanese", "English"]
         case .chinese:
