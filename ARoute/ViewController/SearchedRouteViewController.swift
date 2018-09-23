@@ -18,7 +18,7 @@ final class SearchedRouteViewController: UIViewController {
         setupView()
         setupLocationManager()
         DispatchQueue.global(qos: .background).async {
-            RouteSearcher.scrape(destination: self.destination)
+            RouteSearcher.search(destination: self.destination)
             DispatchQueue.main.async {
                 self.updateLabels()
             }
@@ -41,9 +41,11 @@ fileprivate extension SearchedRouteViewController {
     }
     
     func updateLabels() {
-        for i in 0..<resultLabels.count {
-            resultLabels[i].text = RouteSearcher.searchResult[i]
-        }
+        resultLabels[0].text = RouteSearcher.searchResult["destination"]
+        resultLabels[1].text = RouteSearcher.searchResult["departure"]
+        resultLabels[2].text = RouteSearcher.searchResult["arrival"]
+        resultLabels[3].text = RouteSearcher.searchResult["duration"]
+        resultLabels[4].text = RouteSearcher.searchResult["platform"]
     }
     
     func setupDescriptions() {
@@ -75,7 +77,7 @@ fileprivate extension SearchedRouteViewController {
     
     @objc func didtapReload() {
         DispatchQueue.global(qos: .background).async {
-            RouteSearcher.scrape(destination: self.destination)
+            RouteSearcher.search(destination: self.destination)
             DispatchQueue.main.async {
                 self.setupView()
             }

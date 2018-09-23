@@ -33,7 +33,7 @@ extension AppDelegate: CLLocationManagerDelegate {
     func showNotification(region: CLRegion) {
         let content = UNMutableNotificationContent()
         content.title = NSLocalizedString("notificationTitle", comment: "")
-        content.body = RouteSearcher.searchResult[0]
+        content.body = RouteSearcher.searchResult["destination"]!
         content.sound = UNNotificationSound.default
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         let identifier = region.identifier

@@ -214,9 +214,6 @@ extension ViewController: ARSCNViewDelegate {
             view.sendSubviewToBack(frameImageView)
             segmentIndex = self.languageSegment.selectedSegmentIndex
             languageSegment.isEnabled = false
-            let generator = UINotificationFeedbackGenerator()
-            generator.prepare()
-            generator.notificationOccurred(.success)
         }
         currentLine = Line(rawValue: imageName)
         let baseX = anchor.transform.columns.3.x
@@ -233,9 +230,7 @@ extension ViewController: ARSCNViewDelegate {
 extension ViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        DispatchQueue.global().async {
-            StationGetter.getStationName((locations.last?.coordinate)!)
-        }
+        StationGetter.getStationName((locations.last?.coordinate)!)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
