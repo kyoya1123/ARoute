@@ -17,6 +17,8 @@
 "departure" = "출발 시간";
 "arrival" = "도착 시간";
 "duration" = "소요 시간";
+"hour" = "시간";
+"minute" = "분";
 "platform" = "승강장";
 "notification" = "통지";
 "notificationTitle" = "곧 도착합니다";

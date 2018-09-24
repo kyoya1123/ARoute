@@ -13,12 +13,14 @@ final class SearchedRouteViewController: UIViewController {
     var destination: String!
     let locationManager = CLLocationManager()
     var region = CLCircularRegion()
+    var currentLine: Line!
     
     override func viewDidLoad() {
         setupView()
         setupLocationManager()
         DispatchQueue.global(qos: .background).async {
-            RouteSearcher.search(destination: self.destination)
+            let index = Line.stationNames(self.currentLine, Language(rawValue: "en")!)[0].index(of: self.destination)
+            RouteSearcher.search(destination: self.currentLine.stationCode[index!])
             DispatchQueue.main.async {
                 self.updateLabels()
             }

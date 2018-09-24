@@ -17,6 +17,8 @@
 "departure" = "出发时间";
 "arrival" = "到达时间";
 "duration" = "需要时间";
+"hour" = "小时";
+"minute" = "分";
 "platform" = "站台";
 "notification" = "通知";
 "notificationTitle" = "不久到达";

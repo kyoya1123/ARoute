@@ -193,6 +193,7 @@ fileprivate extension ViewController {
                     DestinationGetter.getLocation(destination: nodeName)
                     let routeView = SearchedRouteViewController()
                     routeView.destination = nodeName
+                    routeView.currentLine = currentLine
                     present(routeView, animated: true, completion: nil)
                 }
             }

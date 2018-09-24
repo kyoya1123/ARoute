@@ -64,6 +64,7 @@
 		9CC6FF9D212FCD590005197F /* DestinationGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationGetter.swift; sourceTree = "<group>"; };
 		9CC6FF9F21311A490005197F /* Tutorial.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
 		9CC6FFA2213172990005197F /* LineGetter.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LineGetter.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		9CD8357521580E660038FBC1 /* StationIDGetter.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = StationIDGetter.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9CEE4EB42127C647000DB960 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		9CEE4EB62127C64D000DB960 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		9CEE4EB82127C6A5000DB960 /* ARoute-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ARoute-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -181,6 +182,7 @@
 			children = (
 				9CC6FFA2213172990005197F /* LineGetter.playground */,
 				9C5A8C7A2131863F00CAF4C0 /* CoordinateGetter.playground */,
+				9CD8357521580E660038FBC1 /* StationIDGetter.playground */,
 			);
 			path = ForDevelop;
 			sourceTree = "<group>";

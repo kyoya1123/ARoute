@@ -17,6 +17,8 @@
 "departure" = "Leaves at";
 "arrival" = "Arrives at";
 "duration" = "Duration";
+"hour" = "hour";
+"minute" = "min";
 "platform" = "Platform";
 "notification" = "Notification";
 "notificationTitle" = "You will arrive soon";

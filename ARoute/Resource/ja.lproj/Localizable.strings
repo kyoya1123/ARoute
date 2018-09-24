@@ -17,6 +17,8 @@
 "departure" = "出発時刻";
 "arrival" = "到着時刻";
 "duration" = "所要時間";
+"hour" = "時間";
+"minute" = "分";
 "platform" = "ホーム";
 "notification" = "通知";
 "notificationTitle" = "まもなく到着します";
