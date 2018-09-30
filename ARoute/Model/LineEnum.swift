@@ -25,25 +25,25 @@ enum Line: String {
         }
     }
     
-    static func stationNames(_ line: Line, _ language: Language) -> [[String]] {
-        return [japaneseNames(line), secondLanguageNames(line, language)]
+    var stationNames: [[String]] {
+        return [japaneseNames, secondLanguageNames]
     }
     
-    private static func secondLanguageNames(_ line: Line, _ language: Language) -> [String] {
-        switch language {
+    private var secondLanguageNames: [String] {
+        switch Language.deviceLang! {
         case .japanese:
             return []
         case .english:
-            return englishNames(line)
+            return englishNames
         case .chinese:
-            return chineseNames(line)
+            return chineseNames
         case .korean:
-            return koreanNames(line)
+            return koreanNames
         }
     }
     
-    private static func japaneseNames(_ line: Line) -> [String] {
-        switch line {
+    private var japaneseNames: [String] {
+        switch self {
         case .yamanote:
             return
                 ["品川", "大崎", "五反田", "目黒", "恵比寿", "渋谷", "原宿", "代々木", "新宿", "新大久保", "高田馬場", "目白", "池袋", "大塚", "巣鴨", "駒込", "田端", "西日暮里", "日暮里", "鶯谷", "上野", "御徒町", "秋葉原", "神田", "東京", "有楽町", "新橋", "浜松町", "田町"]
@@ -65,8 +65,8 @@ enum Line: String {
         }
     }
     
-    private static func englishNames(_ line: Line) -> [String] {
-        switch line {
+    private var englishNames: [String] {
+        switch self {
         case .yamanote:
             return
                 ["Shinagawa", "Ōsaki", "Gotanda", "Meguro", "Ebisu", "Shibuya", "Harajuku", "Yoyogi", "Shinjuku", "Shin-Ōkubo", "Takadanobaba", "Mejiro", "Ikebukuro", "Ōtsuka", "Sugamo", "Komagome", "Tabata", "Nishi-Nippori", "Nippori", "Uguisudani", "Ueno", "Okachimachi", "Akihabara", "Kanda", "Tokyo", "Yūrakuchō", "Shimbashi", "Hamamatsuchō", "Tamachi"]
@@ -88,8 +88,8 @@ enum Line: String {
         }
     }
     
-    private static func chineseNames(_ line: Line) -> [String] {
-        switch line {
+    private var chineseNames: [String] {
+        switch self {
         case .yamanote:
             return
                 ["品川", "大崎", "五反田", "目黑", "惠比壽", "澀谷", "原宿", "代代木", "新宿", "新大久保", "高田馬場", "目白", "池袋", "大塚", "巢鴨", "駒込", "田端", "西日暮里", "日暮里", "鶯谷", "上野", "御徒町", "秋葉原", "神田", "東京", "有樂町", "新橋", "濱松町", "田町"]
@@ -111,8 +111,8 @@ enum Line: String {
         }
     }
     
-    private static func koreanNames(_ line: Line) -> [String] {
-        switch line {
+    private var koreanNames: [String] {
+        switch self {
         case .yamanote:
             return
                 ["시나가와", "오사키", "고탄다", "메구로", "에비스", "시부야", "하라주쿠", "요요기", "신주쿠", "신오쿠보", "다카다노바바", "메지로", "이케부쿠로", "오쓰카", "스가모", "고마고메", "다바타", "니시닛포리", "닛포리", "우구이스다니", "우에노", "오카치마치", "아키하바라", "간다", "도쿄", "유라쿠초", "신바시", "하마마쓰초", "다마치"]

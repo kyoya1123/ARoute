@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController" customModule="ARoute" customModuleProvider="target">
             <connections>
+                <outlet property="displayTypeSegment" destination="d8X-T1-dX4" id="9Kz-IW-2qJ"/>
                 <outlet property="frameImageView" destination="YVV-Zv-TZY" id="6YU-c0-uCB"/>
                 <outlet property="helpButton" destination="eDO-xm-5rZ" id="1Ry-M3-sSc"/>
                 <outlet property="languageSegment" destination="5cr-ru-FNG" id="Axu-TS-nKC"/>
@@ -21,43 +22,64 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FZt-ah-bY2">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                     <color key="backgroundColor" red="0.69411764705882351" green="0.78823529411764703" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </arscnView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mmu-FE-yKR">
-                    <rect key="frame" x="315" y="20" width="44" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mmu-FE-yKR">
+                    <rect key="frame" x="315" y="44" width="44" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="44" id="wQi-XC-2W0"/>
+                        <constraint firstAttribute="height" constant="44" id="z1d-Tf-uoV"/>
+                    </constraints>
                     <state key="normal" image="reset"/>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eDO-xm-5rZ">
-                    <rect key="frame" x="16" y="20" width="44" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" image="help"/>
-                </button>
                 <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="frame" translatesAutoresizingMaskIntoConstraints="NO" id="YVV-Zv-TZY">
-                    <rect key="frame" x="37" y="183" width="300" height="300"/>
+                    <rect key="frame" x="37" y="223" width="300" height="365"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5cr-ru-FNG">
-                    <rect key="frame" x="105" y="28" width="164" height="29"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5cr-ru-FNG">
+                    <rect key="frame" x="115" y="730" width="145" height="29"/>
                     <segments>
                         <segment title="Japanese"/>
                         <segment title="English"/>
                     </segments>
                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </segmentedControl>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eDO-xm-5rZ">
+                    <rect key="frame" x="16" y="44" width="44" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="44" id="25A-Tm-MAE"/>
+                        <constraint firstAttribute="height" constant="44" id="Z5p-Vx-foq"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" image="help"/>
+                </button>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="d8X-T1-dX4">
+                    <rect key="frame" x="155" y="52" width="65" height="29"/>
+                    <segments>
+                        <segment title="3D"/>
+                        <segment title="2D"/>
+                    </segments>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </segmentedControl>
             </subviews>
             <constraints>
-                <constraint firstItem="FZt-ah-bY2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="0w3-HE-Etz"/>
-                <constraint firstItem="FZt-ah-bY2" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="0zd-6x-Bfv"/>
-                <constraint firstItem="FZt-ah-bY2" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="LyM-f4-ct6"/>
-                <constraint firstItem="FZt-ah-bY2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="MUq-CF-mSR"/>
+                <constraint firstItem="eDO-xm-5rZ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="8oL-vi-3Bc"/>
+                <constraint firstItem="FZt-ah-bY2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Q9e-go-Nq1"/>
+                <constraint firstItem="mmu-FE-yKR" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="QKq-cP-JJk"/>
+                <constraint firstItem="FZt-ah-bY2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ddA-x2-567"/>
+                <constraint firstItem="5cr-ru-FNG" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="dhc-dU-q0o"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="5cr-ru-FNG" secondAttribute="bottom" constant="20" id="h8s-So-kC9"/>
+                <constraint firstAttribute="bottom" secondItem="FZt-ah-bY2" secondAttribute="bottom" id="hFm-PX-XgP"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="mmu-FE-yKR" secondAttribute="trailing" constant="16" id="jYV-cL-sr2"/>
+                <constraint firstItem="eDO-xm-5rZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="oJA-Qk-OzU"/>
+                <constraint firstItem="d8X-T1-dX4" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="pAs-mf-iAd"/>
+                <constraint firstAttribute="trailing" secondItem="FZt-ah-bY2" secondAttribute="trailing" id="taM-zN-PXO"/>
+                <constraint firstItem="d8X-T1-dX4" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="zEb-4k-FbZ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="33.5" y="53.5"/>

@@ -10,14 +10,13 @@ final class ViewController: UIViewController {
     @IBOutlet var helpButton: UIButton!
     @IBOutlet var frameImageView: UIImageView!
     @IBOutlet var languageSegment: UISegmentedControl!
+    @IBOutlet var displayTypeSegment: UISegmentedControl!
     
     var locationManager: CLLocationManager!
     var currentLine: Line!
-    var deviceLang: Language!
     
     override func viewDidLoad() {
         setupLocationManager()
-        setLanguage()
         setupView()
     }
     
@@ -46,16 +45,7 @@ final class ViewController: UIViewController {
     }
 }
 
-fileprivate extension ViewController {
-    
-    func setLanguage() {
-        let prefLang = Locale.preferredLanguages.first
-        if let language = Language(rawValue: String(prefLang!.prefix(2))) {
-            deviceLang = language
-        } else {
-            deviceLang = .english
-        }
-    }
+private extension ViewController {
     
     func setupView() {
         setupButtons()
@@ -69,11 +59,11 @@ fileprivate extension ViewController {
     }
     
     func setupSegmentControl() {
-        if deviceLang == .japanese {
+        if Language.deviceLang == .japanese {
             languageSegment.removeFromSuperview()
             return
         }
-        let titles = deviceLang.segmentTitle
+        let titles = Language.deviceLang.segmentTitle
         languageSegment.setTitle(titles[0], forSegmentAt: 0)
         languageSegment.setTitle(titles[1], forSegmentAt: 1)
         languageSegment.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Kano-regular", size: 15) ?? UIFont()], for: .normal)
@@ -153,18 +143,10 @@ fileprivate extension ViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func complementaryColor(baseColor: UIColor) -> UIColor {
-        let ciColor = CIColor(color: baseColor)
-        let compRed = 1 - ciColor.red
-        let compGreen = 1 - ciColor.green
-        let compBlue = 1 - ciColor.blue
-        return UIColor(red: compRed, green: compGreen, blue: compBlue, alpha: 1)
-    }
-    
     func putStation(at position: SCNVector3, nodeName: String, textString: String) {
         var color = currentLine.color
         if nodeName == StationGetter.stationName {
-            color = complementaryColor(baseColor: color)
+            color = color.complementaryColor
         }
         putSphere(at: position, color: color, name: nodeName)
         let textPosition = SCNVector3(position.x, position.y, position.z + 0.02)
@@ -199,29 +181,37 @@ fileprivate extension ViewController {
             }
         }
     }
+    
+    func transitTo2DMap() {
+        let mapVC = RouteMapViewController()
+        mapVC.currentLine = currentLine
+        present(mapVC, animated: true, completion: nil)
+    }
 }
 
 extension ViewController: ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        sceneView.scene.rootNode.enumerateChildNodes { node, arg   in
-            node.removeFromParentNode()
-        }
         guard let imageAnchor = anchor as? ARImageAnchor else { return }
         guard let imageName = imageAnchor.referenceImage.name else { return }
-        print(imageName)
+        currentLine = Line(rawValue: imageName)
         var segmentIndex: Int!
         DispatchQueue.main.sync {
+            if displayTypeSegment.selectedSegmentIndex == 1 {
+                transitTo2DMap()
+            }
             view.sendSubviewToBack(frameImageView)
             segmentIndex = self.languageSegment.selectedSegmentIndex
             languageSegment.isEnabled = false
         }
-        currentLine = Line(rawValue: imageName)
+        sceneView.scene.rootNode.enumerateChildNodes { node, arg   in
+            node.removeFromParentNode()
+        }
         let baseX = anchor.transform.columns.3.x
         let baseY = anchor.transform.columns.3.y - 0.01
         let baseZ = anchor.transform.columns.3.z - 0.01
         let coordinateData = currentLine.coordinate
-        let stationNames = Line.stationNames(currentLine, deviceLang)
+        let stationNames = currentLine.stationNames
         for i in 0..<stationNames[0].count {
             self.putStation(at: SCNVector3(baseX + coordinateData[i][0] * 3, baseY + coordinateData[i][1] * 3, baseZ), nodeName: stationNames[0][i], textString: stationNames[segmentIndex][i])
         }

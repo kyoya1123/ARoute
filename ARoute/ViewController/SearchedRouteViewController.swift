@@ -27,7 +27,7 @@ final class SearchedRouteViewController: UIViewController {
     }
 }
 
-fileprivate extension SearchedRouteViewController {
+private extension SearchedRouteViewController {
     
     func setupView() {
         setupDescriptions()
@@ -115,9 +115,10 @@ fileprivate extension SearchedRouteViewController {
     }
     
     func searchRoute() {
-        let departureIndex = Line.stationNames(self.currentLine, Language(rawValue: "en")!)[0].index(of: StationGetter.stationName)!
-        let destinationIndex = Line.stationNames(self.currentLine, Language(rawValue: "en")!)[0].index(of: self.destination)!
-        RouteSearcher.search(departure: self.currentLine.stationCode[departureIndex], destination: self.currentLine.stationCode[destinationIndex])
+        let stationNames = currentLine.stationNames[0]
+        let departureIndex = stationNames.index(of: StationGetter.stationName)!
+        let destinationIndex = stationNames.index(of: self.destination)!
+        RouteSearcher.search(departure: currentLine.stationCode[departureIndex], destination: currentLine.stationCode[destinationIndex])
     }
     
     func checkLocationAuthorization() {

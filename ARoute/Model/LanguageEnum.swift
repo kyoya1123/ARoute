@@ -6,6 +6,8 @@ enum Language: String {
     case korean = "ko"
     case japanese = "ja"
     
+    static var deviceLang: Language!
+    
     var segmentTitle: [String] {
         switch self {
         case .english:

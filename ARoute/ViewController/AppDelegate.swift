@@ -9,6 +9,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     var locationManager: CLLocationManager?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        setLanguage()
         window = UIWindow(frame: UIScreen.main.bounds)
         let vc = ViewController()
         window?.rootViewController = vc
@@ -19,6 +20,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         locationManager?.allowsBackgroundLocationUpdates = true
         locationManager?.delegate = self
         return true
+    }
+}
+
+extension AppDelegate {
+    func setLanguage() {
+        let prefLang = Locale.preferredLanguages.first
+        let language = Language(rawValue: String(prefLang!.prefix(2)))
+        Language.deviceLang = language
     }
 }
 
