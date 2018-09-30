@@ -19,8 +19,7 @@ final class SearchedRouteViewController: UIViewController {
         setupView()
         setupLocationManager()
         DispatchQueue.global(qos: .background).async {
-            let index = Line.stationNames(self.currentLine, Language(rawValue: "en")!)[0].index(of: self.destination)
-            RouteSearcher.search(destination: self.currentLine.stationCode[index!])
+            self.searchRoute()
             DispatchQueue.main.async {
                 self.updateLabels()
             }
@@ -79,7 +78,7 @@ fileprivate extension SearchedRouteViewController {
     
     @objc func didtapReload() {
         DispatchQueue.global(qos: .background).async {
-            RouteSearcher.search(destination: self.destination)
+            self.searchRoute()
             DispatchQueue.main.async {
                 self.setupView()
             }
@@ -113,6 +112,12 @@ fileprivate extension SearchedRouteViewController {
                 }
             }
         }
+    }
+    
+    func searchRoute() {
+        let departureIndex = Line.stationNames(self.currentLine, Language(rawValue: "en")!)[0].index(of: StationGetter.stationName)!
+        let destinationIndex = Line.stationNames(self.currentLine, Language(rawValue: "en")!)[0].index(of: self.destination)!
+        RouteSearcher.search(departure: self.currentLine.stationCode[departureIndex], destination: self.currentLine.stationCode[destinationIndex])
     }
     
     func checkLocationAuthorization() {

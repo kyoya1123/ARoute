@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9C371E672128F14B0003B58E /* Kano.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9C371E662128F14B0003B58E /* Kano.otf */; };
 		9C371E692129154E0003B58E /* LineEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C371E682129154E0003B58E /* LineEnum.swift */; };
 		9C46AD202157D1B3001E3FB1 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C46AD1F2157D1B3001E3FB1 /* SwiftyJSON.swift */; };
 		9C4D7BB52155267B000DFDDF /* RouteSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4D7BB42155267B000DFDDF /* RouteSearcher.swift */; };
@@ -25,6 +24,7 @@
 		9C9E41452128CCDA00D2500C /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C9E41442128CCDA00D2500C /* ViewController.xib */; };
 		9C9E41482128D37200D2500C /* SearchedRouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9E41462128D37200D2500C /* SearchedRouteViewController.swift */; };
 		9C9E41492128D37200D2500C /* SearchedRouteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C9E41472128D37200D2500C /* SearchedRouteViewController.xib */; };
+		9CAE518D215A68FB00691243 /* Kano.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9CAE518C215A68FB00691243 /* Kano.otf */; };
 		9CBEC559212D41FC00CE4A70 /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBEC558212D41FC00CE4A70 /* Objects.swift */; };
 		9CC6FF9E212FCD590005197F /* DestinationGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC6FF9D212FCD590005197F /* DestinationGetter.swift */; };
 		9CC6FFA021311A490005197F /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CC6FF9F21311A490005197F /* Tutorial.storyboard */; };
@@ -36,7 +36,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9C371E662128F14B0003B58E /* Kano.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Kano.otf; sourceTree = "<group>"; };
 		9C371E682129154E0003B58E /* LineEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineEnum.swift; sourceTree = "<group>"; };
 		9C46AD1F2157D1B3001E3FB1 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		9C4D7BB42155267B000DFDDF /* RouteSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteSearcher.swift; sourceTree = "<group>"; };
@@ -60,6 +59,7 @@
 		9C9E41442128CCDA00D2500C /* ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		9C9E41462128D37200D2500C /* SearchedRouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedRouteViewController.swift; sourceTree = "<group>"; };
 		9C9E41472128D37200D2500C /* SearchedRouteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchedRouteViewController.xib; sourceTree = "<group>"; };
+		9CAE518C215A68FB00691243 /* Kano.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Kano.otf; sourceTree = "<group>"; };
 		9CBEC558212D41FC00CE4A70 /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 		9CC6FF9D212FCD590005197F /* DestinationGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationGetter.swift; sourceTree = "<group>"; };
 		9CC6FF9F21311A490005197F /* Tutorial.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 		9C9E41422128CBCC00D2500C /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				9C371E662128F14B0003B58E /* Kano.otf */,
+				9CAE518C215A68FB00691243 /* Kano.otf */,
 				9C50F1512138007B002B59EA /* Localizable.strings */,
 				9C7A84E020F08E0E00CEA484 /* art.scnassets */,
 				9C7A84E720F08E1000CEA484 /* Assets.xcassets */,
@@ -262,9 +262,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CAE518D215A68FB00691243 /* Kano.otf in Resources */,
 				9C9E41452128CCDA00D2500C /* ViewController.xib in Resources */,
 				9C7A84E120F08E0E00CEA484 /* art.scnassets in Resources */,
-				9C371E672128F14B0003B58E /* Kano.otf in Resources */,
 				9C7A84EB20F08E1000CEA484 /* LaunchScreen.storyboard in Resources */,
 				9CC6FFA021311A490005197F /* Tutorial.storyboard in Resources */,
 				9C50F14F2138007B002B59EA /* Localizable.strings in Resources */,
