@@ -4,8 +4,8 @@ import CoreLocation
 
 final class SearchedRouteViewController: UIViewController {
     
-    @IBOutlet var closeButton: UIButton!
-    @IBOutlet var reloadButton: UIButton!
+    var closeButton: UIBarButtonItem!
+    var reloadButton: UIBarButtonItem!
     @IBOutlet var descriptionLabels: [UILabel]!
     @IBOutlet var resultLabels: [UILabel]!
     @IBOutlet var notificationSwitch: UISwitch!
@@ -25,14 +25,25 @@ final class SearchedRouteViewController: UIViewController {
             }
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setupNavigationBar()
+    }
 }
 
 private extension SearchedRouteViewController {
     
     func setupView() {
         setupDescriptions()
-        setupButton()
         setupSwitch()
+    }
+    
+    func setupNavigationBar() {
+        setupButton()
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationItem.hidesBackButton = true
+        navigationItem.setLeftBarButton(closeButton, animated: false)
+        navigationItem.setRightBarButton(reloadButton, animated: false)
     }
     
     func setupLocationManager() {
@@ -42,7 +53,11 @@ private extension SearchedRouteViewController {
     }
     
     func updateLabels() {
-        resultLabels[0].text = destination
+        if Language.deviceLang == .japanese {
+            resultLabels[0].text = destination
+        } else {
+            resultLabels[0].text = currentLine.stationNames[1][currentLine.stationNames[0].index(of: destination)!]
+        }
         resultLabels[1].text = RouteSearcher.searchResult["departure"]
         resultLabels[2].text = RouteSearcher.searchResult["arrival"]
         resultLabels[3].text = RouteSearcher.searchResult["duration"]
@@ -64,8 +79,18 @@ private extension SearchedRouteViewController {
     }
     
     func setupButton() {
-        closeButton.addTarget(self, action: #selector(didtapClose), for: .touchUpInside)
-        reloadButton.addTarget(self, action: #selector(didtapReload), for: .touchUpInside)
+        let tmpClose = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
+        tmpClose.setImage(UIImage(named: "back"), for: .normal)
+        tmpClose.addTarget(self, action: #selector(didtapClose), for: .touchUpInside)
+        closeButton = UIBarButtonItem(customView: tmpClose)
+        closeButton.customView?.widthAnchor.constraint(equalToConstant: 35).isActive = true
+        closeButton.customView?.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        let tmpReload = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
+        tmpReload.setImage(UIImage(named: "reset"), for: .normal)
+        tmpReload.addTarget(self, action: #selector(didtapReload), for: .touchUpInside)
+        reloadButton = UIBarButtonItem(customView: tmpReload)
+        reloadButton.customView?.widthAnchor.constraint(equalToConstant: 35).isActive = true
+        reloadButton.customView?.heightAnchor.constraint(equalToConstant: 35).isActive = true
     }
     
     func setupSwitch() {
@@ -73,7 +98,7 @@ private extension SearchedRouteViewController {
     }
     
     @objc func didtapClose() {
-        self.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func didtapReload() {
@@ -90,7 +115,9 @@ private extension SearchedRouteViewController {
         case true:
             checkNotificationAuthorization()
         case false:
-            locationManager.stopMonitoring(for: region)
+            if CLLocationManager.isMonitoringAvailable(for: CLRegion.self) {
+                locationManager.stopMonitoring(for: region)
+            }
         }
     }
     
@@ -117,7 +144,7 @@ private extension SearchedRouteViewController {
     func searchRoute() {
         let stationNames = currentLine.stationNames[0]
         let departureIndex = stationNames.index(of: StationGetter.stationName)!
-        let destinationIndex = stationNames.index(of: self.destination)!
+        let destinationIndex = stationNames.index(of: destination)!
         RouteSearcher.search(departure: currentLine.stationCode[departureIndex], destination: currentLine.stationCode[destinationIndex])
     }
     

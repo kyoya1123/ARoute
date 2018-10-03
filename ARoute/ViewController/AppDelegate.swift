@@ -12,7 +12,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         setLanguage()
         window = UIWindow(frame: UIScreen.main.bounds)
         let vc = ViewController()
-        window?.rootViewController = vc
+        let nav = UINavigationController(rootViewController: vc)
+        nav.navigationBar.barTintColor = UIColor(displayP3Red: 46/255, green: 49/255, blue: 54/255, alpha: 1)
+        window?.rootViewController = nav
         window?.makeKeyAndVisible()
         locationManager = CLLocationManager()
         locationManager?.desiredAccuracy = kCLLocationAccuracyHundredMeters

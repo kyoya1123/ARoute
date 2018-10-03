@@ -21,6 +21,7 @@ final class ViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: false)
         resetTracking()
         sceneView.session.run(setupTrackingConfiguration())
     }
@@ -59,6 +60,7 @@ private extension ViewController {
     }
     
     func setupSegmentControl() {
+        displayTypeSegment.addTarget(self, action: #selector(didchangeType), for: .valueChanged)
         if Language.deviceLang == .japanese {
             languageSegment.removeFromSuperview()
             return
@@ -67,6 +69,14 @@ private extension ViewController {
         languageSegment.setTitle(titles[0], forSegmentAt: 0)
         languageSegment.setTitle(titles[1], forSegmentAt: 1)
         languageSegment.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Kano-regular", size: 15) ?? UIFont()], for: .normal)
+    }
+    
+    @objc func didchangeType() {
+        if displayTypeSegment.selectedSegmentIndex ==  1 {
+            languageSegment.isEnabled = false
+        } else {
+            languageSegment.isEnabled = true
+        }
     }
     
     @objc func didtapReset() {
@@ -176,7 +186,7 @@ private extension ViewController {
                     let routeView = SearchedRouteViewController()
                     routeView.destination = nodeName
                     routeView.currentLine = currentLine
-                    present(routeView, animated: true, completion: nil)
+                    navigationController?.pushViewController(routeView, animated: true)
                 }
             }
         }
@@ -185,7 +195,7 @@ private extension ViewController {
     func transitTo2DMap() {
         let mapVC = RouteMapViewController()
         mapVC.currentLine = currentLine
-        present(mapVC, animated: true, completion: nil)
+        navigationController?.pushViewController(mapVC, animated: true)
     }
 }
 
@@ -196,25 +206,31 @@ extension ViewController: ARSCNViewDelegate {
         guard let imageName = imageAnchor.referenceImage.name else { return }
         currentLine = Line(rawValue: imageName)
         var segmentIndex: Int!
+        var dispatchWorkItem:DispatchWorkItem?
+        dispatchWorkItem = DispatchWorkItem {
+            print("asdfjkasflkjasdf")
+            self.sceneView.scene.rootNode.enumerateChildNodes { node, arg   in
+                node.removeFromParentNode()
+            }
+            let baseX = anchor.transform.columns.3.x
+            let baseY = anchor.transform.columns.3.y - 0.01
+            let baseZ = anchor.transform.columns.3.z - 0.01
+            let coordinateData = self.currentLine.coordinate
+            let stationNames = self.currentLine.stationNames
+            for i in 0..<stationNames[0].count {
+                self.putStation(at: SCNVector3(baseX + coordinateData[i][0] * 3, baseY + coordinateData[i][1] * 3, baseZ), nodeName: stationNames[0][i], textString: stationNames[segmentIndex][i])
+            }
+        }
         DispatchQueue.main.sync {
             if displayTypeSegment.selectedSegmentIndex == 1 {
                 transitTo2DMap()
+                dispatchWorkItem?.cancel()
             }
             view.sendSubviewToBack(frameImageView)
             segmentIndex = self.languageSegment.selectedSegmentIndex
             languageSegment.isEnabled = false
         }
-        sceneView.scene.rootNode.enumerateChildNodes { node, arg   in
-            node.removeFromParentNode()
-        }
-        let baseX = anchor.transform.columns.3.x
-        let baseY = anchor.transform.columns.3.y - 0.01
-        let baseZ = anchor.transform.columns.3.z - 0.01
-        let coordinateData = currentLine.coordinate
-        let stationNames = currentLine.stationNames
-        for i in 0..<stationNames[0].count {
-            self.putStation(at: SCNVector3(baseX + coordinateData[i][0] * 3, baseY + coordinateData[i][1] * 3, baseZ), nodeName: stationNames[0][i], textString: stationNames[segmentIndex][i])
-        }
+        DispatchQueue.global().async(execute: dispatchWorkItem!)
     }
 }
 

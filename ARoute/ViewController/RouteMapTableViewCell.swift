@@ -2,7 +2,7 @@ import UIKit
 
 final class RouteMapTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var colorView: UIView!
+    @IBOutlet weak var colorView: UILabel!
     @IBOutlet weak var stationNameLabel: UILabel!
     
     override func layoutSubviews() {

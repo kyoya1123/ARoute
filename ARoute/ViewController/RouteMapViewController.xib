@@ -21,16 +21,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="55" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TQB-ha-j5f">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
             <constraints>
-                <constraint firstItem="TQB-ha-j5f" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="J5i-MA-629"/>
-                <constraint firstAttribute="bottom" secondItem="TQB-ha-j5f" secondAttribute="bottom" id="NtX-Cr-pxU"/>
-                <constraint firstItem="TQB-ha-j5f" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="exf-Db-LWD"/>
-                <constraint firstItem="TQB-ha-j5f" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hf9-J7-OJl"/>
+                <constraint firstItem="TQB-ha-j5f" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="5Fe-QS-Plb"/>
+                <constraint firstAttribute="bottom" secondItem="TQB-ha-j5f" secondAttribute="bottom" id="8jl-aH-9gb"/>
+                <constraint firstItem="TQB-ha-j5f" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="FfH-YU-7Ho"/>
+                <constraint firstItem="TQB-ha-j5f" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="HOf-cO-5y8"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
